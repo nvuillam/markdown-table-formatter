@@ -5,7 +5,7 @@ const { MarkdownTableFormatterCli } = require('../lib/index');
 const {
     beforeEachTestCase,
     TEST_FILE_GOOD,
-    TEST_FILE_BAD
+    TEST_FILE_BAD,
     checkStatus,
 /*    checkStdOutIncludes,
     checkStdErrIncludes */
@@ -40,6 +40,7 @@ describe("Tests", () => {
         assert(res.updates.length === 2,`${TEST_FILE_BAD} should have been updated`)
     });
 
+    /*
     it("should tell that a file argument is mandatory", async () => {
 
     });
@@ -51,6 +52,7 @@ describe("Tests", () => {
     it("should show help", async () => {
 
     });
+    */
 
 
 });
