@@ -6,6 +6,9 @@
   "files": [
     "lib/"
   ],
+  "bin": {
+    "markdown-table-formatter": "lib/index.js"
+  },
   "scripts": {
     "lint:fix": "eslint **/*.js --fix && prettier --write \"./lib/**/*.{js,jsx,json}\" --tab-width 4 --print-width 150",
     "test": "mocha \"test/**/*.test.js\"",
@@ -31,6 +34,7 @@
   "homepage": "https://github.com/nvuillam/markdown-table-formatter#readme",
   "dependencies": {
     "debug": "^4.1.1",
+    "find-package-json": "^1.2.0",
     "fs-extra": "^9.0.1",
     "markdown-table-prettify": "^3.2.2"
   },
