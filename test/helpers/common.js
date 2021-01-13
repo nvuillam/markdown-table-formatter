@@ -1,12 +1,16 @@
 #! /usr/bin/env node
 const assert = require("assert");
 
+const startPath = "./test/test_files/";
+const TEST_FILE_GOOD = startPath + "markdown_good_1.md";
+const TEST_FILE_BAD = startPath + "markdown_bad_1.md";
+
 // Reset codeNarcCallsCounter before each test
 const beforeEachTestCase = function () {
 };
 
-function checkStatus(statusCode, status, stdout, stderr) {
-    assert(status === statusCode, `Status is ${statusCode} (${status} returned)\nstdout:\n${stdout}\nstderr:\n${stderr}`);
+function checkStatus(statusCode, status) {
+    assert(status === statusCode, `Status is ${statusCode} (${status} returned)`);
 }
 
 function checkStdOutIncludes(textToCheck, stdout, stderr) {
@@ -27,6 +31,8 @@ module.exports = {
     checkStatus,
     checkStdOutIncludes,
     checkStdOutIncludesOneOf,
-    checkStdErrIncludes
+    checkStdErrIncludes,
+    TEST_FILE_GOOD,
+    TEST_FILE_BAD
 }
 
