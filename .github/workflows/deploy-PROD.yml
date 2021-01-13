@@ -44,6 +44,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: npm install
       - run: npm run test:coverage
+      - run: git config --global user.email "nicolas.vuillamy@gmail.com"
+      - run: git config --global user.name "Nicolas.Vuillamy"
       - run: npm version prerelease --preid=$(date '+%d-%m-%Y_%H-%M')
       - run: npm publish --tag beta
         env:
