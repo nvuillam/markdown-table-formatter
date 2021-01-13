@@ -1,0 +1,11 @@
+{
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        "package-lock.json",
+        ".vscode"
+    ],
+    "language": "en",
+    "version": "0.1"
+}
