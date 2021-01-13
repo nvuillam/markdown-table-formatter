@@ -21,7 +21,7 @@ describe("Tests", () => {
 
     });
 
-    it("should check a single file with successs", async () => {
+    it("should check a single file with success", async () => {
 
     });
 

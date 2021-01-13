@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/npm/l/markdown-table-formatter.svg)](https://github.com/nvuillam/markdown-table-formatter/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Format markdown tables in files, using embeddeded [markdown-table-prettify](https://www.npmjs.com/package/markdown-table-prettify)
+Format markdown tables in files, using embedded [markdown-table-prettify](https://www.npmjs.com/package/markdown-table-prettify)
 
 ## Installation
 
@@ -43,14 +43,28 @@ markdown-table-formatter [OPTIONS] (file(s))
 
 ## Examples
 
-Call a class located in classpath
+Format markdown tables in a single file
 
-```javascript
-const java = new MarkdownTableFormatter({
-    classPath: 'test/java/dist',
-    mainClass: 'com.nvuillam.MarkdownTableFormatter.MarkdownTableFormatterTester'
-});
-const { status, stdout, stderr } = await java.run();
+```shell
+markdown-table-formatter myfile.md
+```
+
+Format markdown tables in a multiple file
+
+```shell
+markdown-table-formatter myfile.md anotherFile.md andAnotherFile.md
+```
+
+Check if markdown table formatting is necessary in a single file
+
+```shell
+markdown-table-formatter --check myfile.md
+```
+
+Check if markdown table formatting is necessary in a multiple files
+
+```shell
+markdown-table-formatter --check myfile.md anotherFile.md andAnotherFile.md
 ```
 
 You can see **more examples in** [**test methods**](https://github.com/nvuillam/markdown-table-formatter/blob/master/test/markdown-table-formatter.test.js)
