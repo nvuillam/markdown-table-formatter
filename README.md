@@ -79,7 +79,7 @@ Please follow [Contribution instructions](https://github.com/nvuillam/markdown-t
 
 ## RELEASE NOTES
 
-### [1.0.0] 2020-08-10
+## [0.0.1] 2021-01-13
 
 - Initial version
 
