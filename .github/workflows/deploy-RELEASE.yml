@@ -1,0 +1,50 @@
+---
+#######################################
+# Start the job on all push to master #
+#######################################
+name: "Deploy release"
+on:
+  release:
+    # Want to run the automation when a release is created
+    types: ["created"]
+    paths:
+      - "lib/**"
+      - "README.md"
+      - "CHANGELOG.mg"
+
+###############
+# Set the Job #
+###############
+jobs:
+  build:
+    # Name the Job
+    name: Deploy release on NPM
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+    # Only run this on the main repo
+    if: "!contains(github.event.head_commit.message, 'skip deploy')"
+    ##################
+    # Load all steps #
+    ##################
+    steps:
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
+        uses: actions/checkout@v2.3.3
+        with:
+          fetch-depth: 0
+
+      ##############################################################
+      # Publish updated version of markdown-table-formatter on NPM #
+      ##############################################################
+      - uses: actions/setup-node@v2.1.3
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm install
+      - run: npm run test:coverage
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
