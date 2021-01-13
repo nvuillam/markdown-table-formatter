@@ -13,6 +13,8 @@
 
 Format markdown tables in files, using embedded [markdown-table-prettify](https://www.npmjs.com/package/markdown-table-prettify)
 
+Note: **WORK IN PROGRESS, NOT USABLE YET**
+
 ## Installation
 
 ### Local
