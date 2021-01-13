@@ -1,33 +1,43 @@
 #! /usr/bin/env node
 "use strict";
-//const { MarkdownTableFormatter } = require('../lib/index');
-
+const assert = require("assert");
+const { MarkdownTableFormatterCli } = require('../lib/index');
 const {
     beforeEachTestCase,
-/*    checkStatus,
-    checkStdOutIncludes,
+    TEST_FILE_GOOD,
+    TEST_FILE_BAD
+    checkStatus,
+/*    checkStdOutIncludes,
     checkStdErrIncludes */
 } = require("./helpers/common");
-const { MarkdownTableFormatterCli } = require('../lib/index');
 
 describe("Tests", () => {
     beforeEach(beforeEachTestCase);
 
-    it("should format a single file", async () => {
-        const args = [null, null, "test_files/markdown_bad_1.md"];
-        await new MarkdownTableFormatterCli().run(args);
-    });
-
-    it("should format multiple files", async () => {
-
-    });
-
     it("should check a single file with success", async () => {
-
+        const args = [null, null,"--check", TEST_FILE_GOOD];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStatus(res.status,0)
     });
 
     it("should check a single file with failure", async () => {
+        const args = [null, null, "--check", TEST_FILE_BAD];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStatus(res.status,1)
+    });
 
+    it("should format a single file", async () => {
+        const args = [null, null, TEST_FILE_BAD];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStatus(res.status,0)
+        assert(res.updates.length === 1,`${TEST_FILE_BAD} should have been updated`)
+    });
+
+    it("should format multiple files", async () => {
+        const args = [null, null,TEST_FILE_GOOD, TEST_FILE_BAD];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStatus(res.status,0)
+        assert(res.updates.length === 2,`${TEST_FILE_BAD} should have been updated`)
     });
 
     it("should tell that a file argument is mandatory", async () => {
