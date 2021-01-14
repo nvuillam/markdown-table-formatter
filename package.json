@@ -1,6 +1,6 @@
 {
   "name": "markdown-table-formatter",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Format markdown tables in files",
   "main": "./lib/index.js",
   "files": [
