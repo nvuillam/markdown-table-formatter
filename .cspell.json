@@ -7,5 +7,19 @@
         ".vscode"
     ],
     "language": "en",
-    "version": "0.1"
+    "version": "0.1",
+    "words": [
+        "FILEIO",
+        "Vuillamy",
+        "codecov",
+        "fileoverview",
+        "fkirc",
+        "markdownlint",
+        "myfile",
+        "nvuillam",
+        "optionator",
+        "preid",
+        "socio",
+        "stefanzweifel"
+    ]
 }

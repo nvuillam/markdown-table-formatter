@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test_linux:
-    name: Test - Unbuntu Node 12
+    name: Test - Ubuntu Node 12
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
