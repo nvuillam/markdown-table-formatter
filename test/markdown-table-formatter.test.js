@@ -1,6 +1,9 @@
 #! /usr/bin/env node
 "use strict";
 const assert = require("assert");
+const os = require("os");
+const fse = require("fs-extra");
+const path = require("path");
 const { MarkdownTableFormatterCli } = require('../lib/index');
 const {
     beforeEachTestCase,
@@ -27,7 +30,7 @@ describe("Tests", () => {
 
     it("should format a single file", async () => {
         const file_bad_tmp = os.tmpdir() +"/"+ TEST_FILE_BAD;
-        fs.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
         const args = [null, null, file_bad_tmp];
         const res = await new MarkdownTableFormatterCli().run(args);
         checkStatus(res.status,0)
@@ -35,14 +38,14 @@ describe("Tests", () => {
     });
 
     it("should format multiple files", async () => {
-        const file_good_tmp = os.tmpdir() +"/"+ TEST_FILE_GOOD;
-        fs.copySync(path.resolve(TEST_FILE_GOOD), file_good_tmp);
         const file_bad_tmp = os.tmpdir() +"/"+ TEST_FILE_BAD;
-        fs.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
-        const args = [null, null,file_good_tmp, file_bad_tmp];
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        const file_bad_tmp2 = os.tmpdir() +"/x/"+ TEST_FILE_BAD;
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+        const args = [null, null,file_bad_tmp, file_bad_tmp2];
         const res = await new MarkdownTableFormatterCli().run(args);
         checkStatus(res.status,0)
-        assert(res.updates.length === 2,`${TEST_FILE_BAD} should have been updated`)
+        assert(res.updates.length === 2,`${file_bad_tmp} and ${file_bad_tmp2} should have been updated`)
     });
 
     
