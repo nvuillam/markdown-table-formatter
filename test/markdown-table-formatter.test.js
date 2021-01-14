@@ -7,8 +7,7 @@ const {
     TEST_FILE_GOOD,
     TEST_FILE_BAD,
     checkStatus,
-/*    checkStdOutIncludes,
-    checkStdErrIncludes */
+    checkStdOutIncludes
 } = require("./helpers/common");
 
 describe("Tests", () => {
@@ -27,32 +26,47 @@ describe("Tests", () => {
     });
 
     it("should format a single file", async () => {
-        const args = [null, null, TEST_FILE_BAD];
+        const file_bad_tmp = os.tmpdir() +"/"+ TEST_FILE_BAD;
+        fs.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        const args = [null, null, file_bad_tmp];
         const res = await new MarkdownTableFormatterCli().run(args);
         checkStatus(res.status,0)
         assert(res.updates.length === 1,`${TEST_FILE_BAD} should have been updated`)
     });
 
     it("should format multiple files", async () => {
-        const args = [null, null,TEST_FILE_GOOD, TEST_FILE_BAD];
+        const file_good_tmp = os.tmpdir() +"/"+ TEST_FILE_GOOD;
+        fs.copySync(path.resolve(TEST_FILE_GOOD), file_good_tmp);
+        const file_bad_tmp = os.tmpdir() +"/"+ TEST_FILE_BAD;
+        fs.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        const args = [null, null,file_good_tmp, file_bad_tmp];
         const res = await new MarkdownTableFormatterCli().run(args);
         checkStatus(res.status,0)
         assert(res.updates.length === 2,`${TEST_FILE_BAD} should have been updated`)
     });
 
-    /*
+    
     it("should tell that a file argument is mandatory", async () => {
-
+        const args = [null, null];
+        try {
+            await new MarkdownTableFormatterCli().run(args);
+        } catch (e) {
+            checkStdOutIncludes("You must send a file or a list of files as argument",e.message,"")            
+        }
     });
 
     it("should show version", async () => {
-
+        const args = [null, null, "--version"];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStdOutIncludes("markdown-table-formatter version",res.stdout,"")
     });
 
     it("should show help", async () => {
-
+        const args = [null, null, "--help"];
+        const res = await new MarkdownTableFormatterCli().run(args);
+        checkStdOutIncludes("markdown-table-formatter [options]",res.stdout,"")
     });
-    */
+    
 
 
 });
