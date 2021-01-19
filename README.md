@@ -1,4 +1,9 @@
-<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD033,MD041 -->
+
+[![Banner](https://raw.githubusercontent.com/nvuillam/markdown-table-formatter/master/docs/assets/images/banner.jpg)](https://github.com/nvuillam/markdown-table-formatter#readme)
+
+---
+
 # Markdown table formatter
 
 [![Version](https://img.shields.io/npm/v/markdown-table-formatter.svg)](https://npmjs.org/package/markdown-table-formatter)
