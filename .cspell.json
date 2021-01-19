@@ -14,6 +14,7 @@
         "codecov",
         "fileoverview",
         "fkirc",
+        "lcov",
         "markdownlint",
         "myfile",
         "nvuillam",

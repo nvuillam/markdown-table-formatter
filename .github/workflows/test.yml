@@ -16,7 +16,11 @@ jobs:
       - name: Install dependencies and link
         run: npm ci && npm link
       - name: Run tests
-        run: npm run test
+        run: npm run test:coverage
+      - name: Submitting code coverage to codecov
+        run: |
+          ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
+          curl -s https://codecov.io/bash | bash
 
   test_windows:
     name: Test - Windows
