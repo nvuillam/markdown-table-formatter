@@ -1,8 +1,6 @@
-<!-- markdownlint-disable MD033,MD041 -->
+<!-- markdownlint-disable MD033 MD041 -->
 
 [![Banner](https://raw.githubusercontent.com/nvuillam/markdown-table-formatter/master/docs/assets/images/banner.jpg)](https://github.com/nvuillam/markdown-table-formatter#readme)
-
----
 
 # Markdown table formatter
 
