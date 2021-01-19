@@ -35,11 +35,11 @@ markdown-table-formatter [OPTIONS] (file(s))
 
 ### Options
 
-| Parameter          | Description                         | Default value   |
-|--------------------|--------------------------------|---------------|
-| -c<br/>--check            | Check only, does not update files       |`false`                 |
-| -h<br/>--help         | Displays help                   | <!-- --> |
-| -v<br/>--version         | Displays version                   | <!-- --> |
+| Parameter        | Description                       | Default value |
+|------------------|-----------------------------------|---------------|
+| -c<br/>--check   | Check only, does not update files | `false`       |
+| -h<br/>--help    | Displays help                     | <!-- -->      |
+| -v<br/>--version | Displays version                  | <!-- -->      |
 
 ## Examples
 
