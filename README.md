@@ -13,8 +13,6 @@
 
 Format markdown tables in files, using embedded [markdown-table-prettify](https://www.npmjs.com/package/markdown-table-prettify)
 
-Note: **WORK IN PROGRESS, NOT USABLE YET**
-
 ## Installation
 
 ### Local
@@ -37,11 +35,11 @@ markdown-table-formatter [OPTIONS] (file(s))
 
 ### Options
 
-| Parameter          | Description                         | Default value   |
-|--------------------|--------------------------------|---------------|
-| -c<br/>--check            | Check only, does not update files       |`false`                 |
-| -h<br/>--help         | Displays help                   | <!-- --> |
-| -v<br/>--version         | Displays version                   | <!-- --> |
+| Parameter        | Description                       | Default value |
+|------------------|-----------------------------------|---------------|
+| -c<br/>--check   | Check only, does not update files | `false`       |
+| -h<br/>--help    | Displays help                     | <!-- -->      |
+| -v<br/>--version | Displays version                  | <!-- -->      |
 
 ## Examples
 
@@ -71,6 +69,10 @@ markdown-table-formatter --check myfile.md anotherFile.md andAnotherFile.md
 
 You can see **more examples in** [**test methods**](https://github.com/nvuillam/markdown-table-formatter/blob/master/test/markdown-table-formatter.test.js)
 
+## Continuous Integration
+
+You can automatically check markdown tables formatting and fix it using [Mega-Linter](https://github.com/nvuillam/mega-linter/), that embeds markdown-table-formatter out of the box
+
 ## CONTRIBUTE
 
 Contributions are very welcome !
@@ -79,7 +81,11 @@ Please follow [Contribution instructions](https://github.com/nvuillam/markdown-t
 
 ## RELEASE NOTES
 
-## [1.0.0] 2021-01-13
+## [1.0.2] 2021-01-19
+
+- Fix code coverage
+
+## [1.0.1] 2021-01-13
 
 - First working version :)
 
