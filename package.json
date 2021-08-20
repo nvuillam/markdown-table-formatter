@@ -36,6 +36,7 @@
     "debug": "^4.1.1",
     "find-package-json": "^1.2.0",
     "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
     "markdown-table-prettify": "^3.4.0",
     "optionator": "^0.9.1"
   },

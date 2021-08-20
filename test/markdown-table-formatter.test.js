@@ -28,6 +28,38 @@ describe("Tests", () => {
         checkStatus(res.status,1)
     });
 
+    it("should format all markdown files under current directory", async () => {
+        const tmpDir = path.join(os.tmpdir(),'tmp_test_markdown_table_formatter_'+Math.random());
+        await fse.ensureDir(tmpDir);
+        const file_bad_tmp =tmpDir +"/"+ TEST_FILE_BAD;
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        const file_bad_tmp2 = tmpDir +"/x/"+ TEST_FILE_BAD;
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+        const args = [null, null];
+        const prevCwd = process.cwd() ;
+        process.chdir(tmpDir);
+        const res = await new MarkdownTableFormatterCli().run(args);
+        process.chdir(prevCwd); 
+        checkStatus(res.status,0)
+        assert(res.updates.length === 2,`${TEST_FILE_BAD} should have been updated`)
+    });
+
+    it("should format all markdown files found with glob expression", async () => {
+        const tmpDir = path.join(os.tmpdir(),'tmp_test_markdown_table_formatter_'+Math.random());
+        await fse.ensureDir(tmpDir);
+        const file_bad_tmp = tmpDir +"/"+ TEST_FILE_BAD;
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+        const file_bad_tmp2 = tmpDir +"/"+ "wesh.md";
+        fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+        const args = [null, null, "**/*bad*.md"];
+        const prevCwd = process.cwd() ;
+        process.chdir(tmpDir);
+        const res = await new MarkdownTableFormatterCli().run(args);
+        process.chdir(prevCwd); 
+        checkStatus(res.status,0)
+        assert(res.updates.length === 1,`${TEST_FILE_BAD} should have been updated`)
+    });
+
     it("should format a single file", async () => {
         const file_bad_tmp = os.tmpdir() +"/"+ TEST_FILE_BAD;
         fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
@@ -46,16 +78,6 @@ describe("Tests", () => {
         const res = await new MarkdownTableFormatterCli().run(args);
         checkStatus(res.status,0)
         assert(res.updates.length === 2,`${file_bad_tmp} and ${file_bad_tmp2} should have been updated`)
-    });
-
-    
-    it("should tell that a file argument is mandatory", async () => {
-        const args = [null, null];
-        try {
-            await new MarkdownTableFormatterCli().run(args);
-        } catch (e) {
-            checkStdOutIncludes("You must send a file or a list of files as argument",e.message,"")            
-        }
     });
 
     it("should show version", async () => {
