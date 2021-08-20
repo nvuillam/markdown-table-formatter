@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.0] 2021-04-05
+## [1.2.0] 2021-08-20
 
 - Allow to call markdown-table-formatter with a glob parameter to find files to format
 - Allow to call markdown-table-formatter without arguments (**/*.md will be used by default to collect files)
