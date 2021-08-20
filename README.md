@@ -33,7 +33,7 @@ npm install markdown-table-formatter -g
 ## Usage
 
 ```shell
-markdown-table-formatter [OPTIONS] (file(s))
+markdown-table-formatter [OPTIONS] (file(s) or glob expression)
 ```
 
 ### Options
@@ -45,6 +45,18 @@ markdown-table-formatter [OPTIONS] (file(s))
 | -v<br/>--version | Displays version                  | <!-- -->      |
 
 ## Examples
+
+Format all markdown files found within current directory
+
+```shell
+markdown-table-formatter
+```
+
+Format all markdown files found with a glob expression
+
+```shell
+markdown-table-formatter **/docs/*.md
+```
 
 Format markdown tables in a single file
 
