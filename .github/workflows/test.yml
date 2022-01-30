@@ -28,6 +28,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.3
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and link
         run: npm ci && npm link
       - name: Run tests
@@ -39,6 +43,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.3
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and link
         run: npm ci && npm link
       - name: Run tests
