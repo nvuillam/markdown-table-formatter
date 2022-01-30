@@ -1,29 +1,29 @@
 {
-    "ignorePaths": [
-        "**/node_modules/**",
-        "**/vscode-extension/**",
-        "**/.git/**",
-        "package-lock.json",
-        ".vscode"
-    ],
-    "language": "en",
-    "version": "0.1",
-    "words": [
-        "FILEIO",
-        "Vuillamy",
-        "codecov",
-        "columnpadding",
-        "fileoverview",
-        "fkirc",
-        "lcov",
-        "markdownlint",
-        "myfile",
-        "nvuillam",
-        "optionator",
-        "preid",
-        "socio",
-        "stefanzweifel",
-        "venv",
-        "wesh"
-    ]
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/**",
+    "package-lock.json",
+    ".vscode"
+  ],
+  "language": "en",
+  "version": "0.1",
+  "words": [
+    "FILEIO",
+    "Vuillamy",
+    "codecov",
+    "columnpadding",
+    "fileoverview",
+    "fkirc",
+    "lcov",
+    "markdownlint",
+    "myfile",
+    "nvuillam",
+    "optionator",
+    "preid",
+    "socio",
+    "stefanzweifel",
+    "venv",
+    "wesh"
+  ]
 }
