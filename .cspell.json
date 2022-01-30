@@ -12,6 +12,7 @@
         "FILEIO",
         "Vuillamy",
         "codecov",
+        "columnpadding",
         "fileoverview",
         "fkirc",
         "lcov",

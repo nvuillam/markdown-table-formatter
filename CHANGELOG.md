@@ -3,6 +3,7 @@
 ## [1.3.0] 2022-01-31
 
 - Allow to override the table columns padding number of spaces using argument **--columnpadding**
+- CI: Upgrade MegaLinter to v5
 
 ## [1.2.0] 2021-08-20
 

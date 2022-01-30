@@ -42,7 +42,6 @@ markdown-table-formatter [OPTIONS] (file(s) or glob expression)
 |------------------|-----------------------------------|---------------|
 | -c<br/>--check   | Check only, does not update files | `false`       |
 | -p<br/>--columnpadding   | Override column padding number of spaces | | -h<br/>--help    | Displays help                     | <!-- -->      |
-      |
 | -h<br/>--help    | Displays help                     | <!-- -->      |
 | -v<br/>--version | Displays version                  | <!-- -->      |
 
