@@ -7,10 +7,6 @@ on:
   release:
     # Want to run the automation when a release is created
     types: ["created"]
-    paths:
-      - "lib/**"
-      - "README.md"
-      - "CHANGELOG.mg"
 
 ###############
 # Set the Job #
@@ -31,7 +27,7 @@ jobs:
       # Checkout the code base #
       ##########################
       - name: Checkout Code
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
