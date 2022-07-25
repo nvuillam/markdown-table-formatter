@@ -7,10 +7,6 @@ on:
   release:
     # Want to run the automation when a release is created
     types: ["created"]
-    paths:
-      - "lib/**"
-      - "README.md"
-      - "CHANGELOG.mg"
 
 ###############
 # Set the Job #
