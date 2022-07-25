@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] 2022-07-25
+
+- Add --verbose mode
+- Dependencies: run `npm audit fix` to secure dependencies
+- CI: Upgrade [MegaLinter](https://oxsecurity.github.io/megalinter/latest/) to v6
+
 ## [1.3.0] 2022-01-31
 
 - Allow to override the table columns padding number of spaces using argument **--columnpadding**
