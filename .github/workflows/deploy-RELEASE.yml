@@ -8,6 +8,8 @@ on:
     # Want to run the automation when a release is created
     types: ["created"]
 
+permissions: read-all
+
 ###############
 # Set the Job #
 ###############
