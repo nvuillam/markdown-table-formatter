@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.1] 2023-11-23
+
+- update Megalinter urls in readme
+- add toc to readme
+- ad explanation of how to disable and re-nable formatting to the readme
+
 ## [1.4.0] 2022-07-25
 
 - Add --verbose mode
