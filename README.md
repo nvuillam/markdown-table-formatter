@@ -87,7 +87,7 @@ You can see **more examples in** [**test methods**](https://github.com/nvuillam/
 
 ## Continuous Integration
 
-You can automatically check markdown tables formatting and fix it using [MegaLinter](https://github.com/oxscurity/megalinter/), that embeds markdown-table-formatter out of the box
+You can automatically check markdown tables formatting and fix it using [MegaLinter](https://github.com/oxsecurity/megalinter/), that embeds markdown-table-formatter out of the box
 
 ## Ignoring Code Blocks
 
