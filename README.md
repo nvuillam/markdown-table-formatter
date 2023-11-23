@@ -87,7 +87,15 @@ You can see **more examples in** [**test methods**](https://github.com/nvuillam/
 
 ## Continuous Integration
 
-You can automatically check markdown tables formatting and fix it using [Mega-Linter](https://github.com/nvuillam/mega-linter/), that embeds markdown-table-formatter out of the box
+You can automatically check markdown tables formatting and fix it using [MegaLinter](https://github.com/oxscurity/megalinter/), that embeds markdown-table-formatter out of the box
+
+## Ignoring Code Blocks
+
+You may wish to ignore specific markdown content
+especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
+
+to achieve this place `<!-- markdown-table-prettify-ignore-start -->` before any contebt you wush to be ignored
+and `<!-- markdown-table-prettify-ignore-end -->` after tge content you wish to ignore to resumeformatting.
 
 ## CONTRIBUTE
 
