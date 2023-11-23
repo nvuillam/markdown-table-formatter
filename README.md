@@ -91,11 +91,9 @@ You can automatically check markdown tables formatting and fix it using [MegaLin
 
 ## Ignoring Code Blocks
 
-You may wish to ignore specific markdown content
-especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
+You may wish to ignore specific markdown content, especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 
-to achieve this place `<!-- markdown-table-prettify-ignore-start -->` before any contebt you wush to be ignored
-and `<!-- markdown-table-prettify-ignore-end -->` after tge content you wish to ignore to resumeformatting.
+To achieve this, place `<!-- markdown-table-prettify-ignore-start -->` and `<!-- markdown-table-prettify-ignore-end -->` around the markdown text you don't want to format tables.
 
 ## CONTRIBUTE
 
