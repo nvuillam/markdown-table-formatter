@@ -40,35 +40,18 @@ Format markdown tables in files, using embedded [markdown-table-prettify](https:
 npm install markdown-table-formatter --save
 ```
 
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
-
 ### Global
 
 ```shell
 npm install markdown-table-formatter -g
 ```
 
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
 
 ## Usage
 
 ```shell
 markdown-table-formatter [OPTIONS] (file(s) or glob expression)
 ```
-
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
 
 ### Options
 
@@ -78,12 +61,6 @@ markdown-table-formatter [OPTIONS] (file(s) or glob expression)
 | -p<br/>--columnpadding   | Override column padding number of spaces |
 | -h<br/>--help    | Displays help                     | <!-- -->      |
 | -v<br/>--version | Displays version                  | <!-- -->      |
-
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
 
 ## Examples
 
@@ -125,21 +102,9 @@ markdown-table-formatter --check myfile.md anotherFile.md andAnotherFile.md
 
 You can see **more examples in** [**test methods**](https://github.com/nvuillam/markdown-table-formatter/blob/master/test/markdown-table-formatter.test.js)
 
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
-
 ## Continuous Integration
 
 You can automatically check markdown tables formatting and fix it using [MegaLinter](https://github.com/oxscurity/megalinter/), that embeds markdown-table-formatter out of the box
-
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
 
 ## Ignoring Code Blocks
 
@@ -149,23 +114,11 @@ especially when using with [Megalinter](https://github.com/oxsecurity/megalinter
 to achieve this, place `<!-- markdown-table-prettify-ignore-start -->` before any content you wish to be ignored
 and `<!-- markdown-table-prettify-ignore-end -->` after tge content you wish to ignore to resume formatting.
 
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
-
 ## CONTRIBUTE
 
 Contributions are very welcome !
 
 Please follow [Contribution instructions](https://github.com/nvuillam/markdown-table-formatter/blob/master/CONTRIBUTING.md)
-
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
 
 ## RELEASE NOTES
 
@@ -181,18 +134,6 @@ Please follow [Contribution instructions](https://github.com/nvuillam/markdown-t
 
 - Initial version
 
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
-
 ____
 
 See complete [CHANGELOG](https://github.com/nvuillam/markdown-table-formatter/blob/master/CHANGELOG.md)
-
----
-<!-- Readme Navigation -->
-[(Back to the Table of Contents)](#table-of-contents)
-
----
