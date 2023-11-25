@@ -9,6 +9,7 @@
   - Add explanation of how to disable and re-enable formatting
 - CI
   - Upgrade MegaLinter to v7
+  - Rename master branch into main
 
 ## [1.4.0] 2022-07-25
 

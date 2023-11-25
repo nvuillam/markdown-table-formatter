@@ -50,7 +50,7 @@ jobs:
       - run: git config --global user.email "nicolas.vuillamy@gmail.com"
       - run: git config --global user.name "Nicolas.Vuillamy"
       - run: git stash
-      - run: npm version prerelease --preid="$(date '+%d-%m-%Y_%H-%M')"
+      - run: npm version prerelease --preid="$(date '+%Y%m%d%H%M')"
       - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
