@@ -49,7 +49,7 @@ jobs:
       - run: npm run test:coverage
       - run: git config --global user.email "nicolas.vuillamy@gmail.com"
       - run: git config --global user.name "Nicolas.Vuillamy"
-      - run: git stash
+      - run: git status && git stash
       - run: npm version prerelease --preid="$(date '+%Y%m%d%H%M')"
       - run: npm publish --tag beta
         env:
