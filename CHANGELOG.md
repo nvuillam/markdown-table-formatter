@@ -1,10 +1,13 @@
 # Changelog
 
-## [1.4.1] 2023-11-23
+## [1.4.2] 2023-11-25
 
-- update Megalinter urls in readme
-- add table of contents to readme
-- add explanation of how to disable and re-enable formatting to the readme
+- Upgrade dependencies
+- Doc
+    - Add table of contents
+    - Add explanation of how to disable and re-enable formatting
+- CI
+    - Upgrade MegaLinter to v7
 
 ## [1.4.0] 2022-07-25
 
