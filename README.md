@@ -16,21 +16,18 @@ Format markdown tables in files, using embedded [markdown-table-prettify](https:
 
 [![Banner](https://raw.githubusercontent.com/nvuillam/markdown-table-formatter/master/docs/assets/images/banner.jpg)](https://github.com/nvuillam/markdown-table-formatter#readme)
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents ##
+## Table of contents
 
-- [Markdown table formatter](#Markdown-table-formatter)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-    - [Local](#local)
-    - [Global](#global)
-  - [Usage](#usage)
-    - [Options](#options)
-  - [Examples](#examples)
-  - [Continuous Integration](#Continuous-Integration)
-  - [Ignoring Code Blocks](#Ignoring-Code-Blocks)
-  - [Contribute](#contribute)
-  - [RELEASE NOTES](#RELEASE-NOTES)
+- [Installation](#installation)
+  - [Local](#local)
+  - [Global](#global)
+- [Usage](#usage)
+  - [Options](#options)
+- [Examples](#examples)
+- [Continuous Integration](#Continuous-Integration)
+- [Ignoring Code Blocks](#Ignoring-Code-Blocks)
+- [Contribute](#contribute)
+- [Release notes](#release-notes)
 
 ## Installation
 
@@ -45,7 +42,6 @@ npm install markdown-table-formatter --save
 ```shell
 npm install markdown-table-formatter -g
 ```
-
 
 ## Usage
 
@@ -108,32 +104,16 @@ You can automatically check markdown tables formatting and fix it using [MegaLin
 
 ## Ignoring Code Blocks
 
-You may wish to ignore specific markdown content
-especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
+You may wish to ignore specific markdown content, especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 
-to achieve this, place `<!-- markdown-table-prettify-ignore-start -->` before any content you wish to be ignored
-and `<!-- markdown-table-prettify-ignore-end -->` after tge content you wish to ignore to resume formatting.
+To achieve this, place tags `<!-- markdown-table-prettify-ignore-start -->` and `<!-- markdown-table-prettify-ignore-end -->` around the content you want markdown-table-formatter to ignore.
 
-## CONTRIBUTE
+## Contribute
 
 Contributions are very welcome !
 
 Please follow [Contribution instructions](https://github.com/nvuillam/markdown-table-formatter/blob/master/CONTRIBUTING.md)
 
-## RELEASE NOTES
-
-## [1.0.2] 2021-01-19
-
-- Fix code coverage
-
-## [1.0.1] 2021-01-13
-
-- First working version :)
-
-## [0.0.1] 2021-01-13
-
-- Initial version
-
-____
+## Release Notes
 
 See complete [CHANGELOG](https://github.com/nvuillam/markdown-table-formatter/blob/master/CHANGELOG.md)
