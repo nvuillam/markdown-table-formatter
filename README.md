@@ -24,8 +24,8 @@ Format markdown tables in files, using embedded [markdown-table-prettify](https:
 - [Usage](#usage)
   - [Options](#options)
 - [Examples](#examples)
-- [Continuous Integration](#Continuous-Integration)
-- [Ignoring Code Blocks](#Ignoring-Code-Blocks)
+- [Continuous Integration](#continuous-integration)
+- [Ignoring Code Blocks](#ignoring-code-blocks)
 - [Contribute](#contribute)
 - [Release notes](#release-notes)
 
