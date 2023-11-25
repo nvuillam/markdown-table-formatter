@@ -6,7 +6,7 @@ name: "Deploy beta"
 on:
   push:
     branches:
-      - "master"
+      - "main"
     paths:
       - ".github/workflows/**"
       - "lib/**"
