@@ -31,7 +31,7 @@ describe("Tests", () => {
   it("should format all markdown files under current directory", async () => {
     const tmpDir = path.join(
       os.tmpdir(),
-      "tmp_test_markdown_table_formatter_" + Math.random()
+      "tmp_test_markdown_table_formatter_" + Math.random(),
     );
     await fse.ensureDir(tmpDir);
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
@@ -46,14 +46,14 @@ describe("Tests", () => {
     checkStatus(res.status, 0);
     assert(
       res.updates.length === 2,
-      `${TEST_FILE_BAD} should have been updated`
+      `${TEST_FILE_BAD} should have been updated`,
     );
   });
 
   it("should format all markdown files found with glob expression", async () => {
     const tmpDir = path.join(
       os.tmpdir(),
-      "tmp_test_markdown_table_formatter_" + Math.random()
+      "tmp_test_markdown_table_formatter_" + Math.random(),
     );
     await fse.ensureDir(tmpDir);
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
@@ -68,7 +68,7 @@ describe("Tests", () => {
     checkStatus(res.status, 0);
     assert(
       res.updates.length === 1,
-      `${TEST_FILE_BAD} should have been updated`
+      `${TEST_FILE_BAD} should have been updated`,
     );
   });
 
@@ -80,7 +80,7 @@ describe("Tests", () => {
     checkStatus(res.status, 0);
     assert(
       res.updates.length === 1,
-      `${TEST_FILE_BAD} should have been updated`
+      `${TEST_FILE_BAD} should have been updated`,
     );
   });
 
@@ -92,7 +92,7 @@ describe("Tests", () => {
     checkStatus(res.status, 0);
     assert(
       res.updates.length === 1,
-      `${TEST_FILE_BAD} should have been updated`
+      `${TEST_FILE_BAD} should have been updated`,
     );
   });
 
@@ -106,7 +106,7 @@ describe("Tests", () => {
     checkStatus(res.status, 0);
     assert(
       res.updates.length === 2,
-      `${file_bad_tmp} and ${file_bad_tmp2} should have been updated`
+      `${file_bad_tmp} and ${file_bad_tmp2} should have been updated`,
     );
   });
 

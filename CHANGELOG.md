@@ -1,7 +1,8 @@
 # Changelog
 
-## [1.4.2] 2023-11-25
+## [1.5.0] 2023-11-25
 
+- Core: Now requires Node 16+
 - Upgrade dependencies
 - Doc
   - Add table of contents
