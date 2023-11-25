@@ -13,6 +13,8 @@ on:
       - "README.md"
       - "CHANGELOG.mg"
 
+permissions: read-all
+
 ###############
 # Set the Job #
 ###############

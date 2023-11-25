@@ -44,7 +44,7 @@
     "@babel/eslint-parser": "^7.16.5",
     "eslint": "^7.6.0",
     "mega-linter-runner": "^4.23.1",
-    "mocha": "^8.1.1",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "which": "^2.0.2"
   },
