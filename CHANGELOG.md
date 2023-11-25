@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.2] 2023-11-25
+
+- Upgrade dependencies
+- Doc
+  - Add table of contents
+  - Add explanation of how to disable and re-enable formatting
+- CI
+  - Upgrade MegaLinter to v7
+
 ## [1.4.0] 2022-07-25
 
 - Add --verbose mode

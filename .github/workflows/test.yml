@@ -2,6 +2,8 @@ name: Test
 
 on: [push, pull_request]
 
+permissions: read-all
+
 jobs:
   test_linux:
     name: Test - Ubuntu Node 12
