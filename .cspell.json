@@ -4,7 +4,8 @@
     "**/vscode-extension/**",
     "**/.git/**",
     "package-lock.json",
-    ".vscode"
+    ".vscode",
+    "**/docs/**"
   ],
   "language": "en",
   "version": "0.1",
