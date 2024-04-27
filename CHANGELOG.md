@@ -1,5 +1,7 @@
 # Changelog
 
+- Upgrade minimum NodeJS version to 18.0
+
 ## [1.5.0] 2023-11-25
 
 - Core: Now requires Node 16+
