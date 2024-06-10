@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.6.1] 2024-06-11
+
+- Upgrade dependencies
+
 ## [1.6.0] 2024-04-27
 
 - Core: Upgrade minimum NodeJS version to 18.0
