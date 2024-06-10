@@ -1,6 +1,6 @@
 {
   "name": "markdown-table-formatter",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Format markdown tables in files",
   "main": "./lib/index.js",
   "files": [
@@ -42,14 +42,14 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
-    "eslint": "^8.54.0",
+    "eslint": "^9.0.0",
     "mega-linter-runner": "^7.6.0",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "which": "^4.0.0"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "mocha": {
     "require": [

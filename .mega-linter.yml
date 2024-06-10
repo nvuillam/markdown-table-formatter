@@ -6,8 +6,9 @@ DEFAULT_BRANCH: master # Usually master or main
 # ENABLE: # If you use ENABLE variable, all other languages/formats/tooling-formats will be disabled by default
 # ENABLE_LINTERS: # If you use ENABLE_LINTERS variable, all other linters will be disabled by default
 DISABLE_LINTERS:
-  - REPOSITORY_GIT_DIFF
   - JAVASCRIPT_STANDARD
+  - MARKDOWN_MARKDOWN_LINK_CHECK
+  - REPOSITORY_GIT_DIFF
 DISABLE_ERRORS_LINTERS:
   - REPOSITORY_GITLEAKS
 JAVASCRIPT_DEFAULT_STYLE: prettier
