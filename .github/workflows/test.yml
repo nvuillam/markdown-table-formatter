@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4.0.3
+      - uses: actions/setup-node@v4.0.4
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4.0.3
+      - uses: actions/setup-node@v4.0.4
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4.0.3
+      - uses: actions/setup-node@v4.0.4
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
