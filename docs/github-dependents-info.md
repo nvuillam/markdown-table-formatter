@@ -7,8 +7,8 @@
 
 | Repository | Stars  |
 | :--------  | -----: |
-|<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/1965106?s=40&v=4" width="20" height="20" alt="">  &nbsp; [discord](https://github.com/discord) / [discord-api-docs](https://github.com/discord/discord-api-docs) | 5982 |
-|<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/89921661?s=40&v=4" width="20" height="20" alt="">  &nbsp; [oxsecurity](https://github.com/oxsecurity) / [megalinter](https://github.com/oxsecurity/megalinter) | 1957 |
+|<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/1965106?s=40&v=4" width="20" height="20" alt="">  &nbsp; [discord](https://github.com/discord) / [discord-api-docs](https://github.com/discord/discord-api-docs) | 6003 |
+|<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/89921661?s=40&v=4" width="20" height="20" alt="">  &nbsp; [oxsecurity](https://github.com/oxsecurity) / [megalinter](https://github.com/oxsecurity/megalinter) | 1968 |
 |<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/37697107?s=40&v=4" width="20" height="20" alt="">  &nbsp; [Joeyh021](https://github.com/Joeyh021) / [notes](https://github.com/Joeyh021/notes) | 16 |
 |<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/17500430?s=40&v=4" width="20" height="20" alt="">  &nbsp; [nvuillam](https://github.com/nvuillam) / [njre](https://github.com/nvuillam/njre) | 11 |
 |<img class="avatar mr-2" src="https://avatars.githubusercontent.com/u/46630256?s=40&v=4" width="20" height="20" alt="">  &nbsp; [ScootKit](https://github.com/ScootKit) / [scnx-docs](https://github.com/ScootKit/scnx-docs) | 2 |
