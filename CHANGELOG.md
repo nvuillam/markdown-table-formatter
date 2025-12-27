@@ -1,6 +1,9 @@
 # Changelog
 
+## [1.7.0] 2025-12-27
+
 - Upgrade dependencies
+- CI: Add tests for Node 20, 22 and 24
 
 ## [1.6.1] 2024-06-11
 
