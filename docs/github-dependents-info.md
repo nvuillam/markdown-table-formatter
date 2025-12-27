@@ -8,21 +8,21 @@ The package is utilized by several prominent organizations and high-profile proj
 
 *   **Microsoft** utilizes the package in repositories such as **hve-core** and **edge-ai**.
 *   **Discord** uses it for their official **discord-api-docs**.
-*   **St. Jude Cloud** incorporates the tool within their documentation.
-*   **Altana AI** and **IntelliBridge** maintain dependencies for development environments.
+*   **St. Jude Cloud** incorporates the tool within their documentation repository.
+*   **Altana AI** and **OSISM** are among other professional entities maintaining dependent repositories.
 
 **Popular Tools and Ecosystems**
 
-*   **MegaLinter** (via **oxsecurity**) is a major consumer, using the package for code quality and formatting.
+*   **MegaLinter** (via **oxsecurity**) is a major integrator, using the package for code quality and linting workflows.
 *   **Coder** represents a significant ecosystem of use, appearing across numerous cloud development environment repositories.
-*   **GitHub Actions** integrations are evident through various validation and marketplace workflows.
-*   **Documentation Frameworks** are a common use case, seen in projects like **scnx-docs** and **azlint**.
+*   **GitHub Actions** implementations are common, seen in repositories like **actions-marketplace-validations** and **ivuorinen/actions**.
+*   **Documentation Frameworks** are a primary use case, evidenced by various **api-docs**, **product-catalog**, and **notes** repositories.
 
 **Notable High-Star Dependent Repositories**
 
 *   **coder/coder**: A cloud development platform with 11,826 stars.
-*   **discord/discord-api-docs**: The primary technical documentation for Discord with 6,309 stars.
-*   **oxsecurity/megalinter**: A comprehensive multi-language linting suite with 2,350 stars.
+*   **discord/discord-api-docs**: The primary documentation for the Discord API with 6,309 stars.
+*   **oxsecurity/megalinter**: A suite of linting tools with 2,350 stars.
 *   **Joeyh021/notes**: A personal knowledge base repository with 21 stars.
 
 ## Package nvuillam/markdown-table-formatter
