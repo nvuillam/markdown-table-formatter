@@ -6,23 +6,22 @@ permissions: read-all
 
 jobs:
   test_linux:
-    name: Test - Ubuntu Node 16
+    name: Test - Ubuntu Node 24
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22, 24]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6
       - uses: actions/setup-node@v6.1.0
         with:
-          node-version: "24.x"
+          node-version: "${{ matrix.node-version }}"
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and link
         run: npm ci && npm link
       - name: Run tests
-        run: npm run test:coverage
-      - name: Submitting code coverage to codecov
-        run: |
-          ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
-          curl -s https://codecov.io/bash | bash
+        run: npm run tests
 
   test_windows:
     name: Test - Windows
