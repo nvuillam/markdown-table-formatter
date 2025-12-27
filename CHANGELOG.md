@@ -1,5 +1,7 @@
 # Changelog
 
+- Upgrade dependencies
+
 ## [1.6.1] 2024-06-11
 
 - Upgrade dependencies
