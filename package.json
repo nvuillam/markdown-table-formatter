@@ -10,7 +10,7 @@
     "markdown-table-formatter": "lib/index.js"
   },
   "scripts": {
-    "lint:fix": "eslint **/*.js --fix && prettier --write \"./lib/**/*.{js,jsx,json}\" --tab-width 4 --print-width 150",
+    "lint:fix": "eslint \"**/*.js\" --fix && prettier --write \"./lib/**/*.{js,jsx,json}\"",
     "test": "mocha \"test/**/*.test.js\"",
     "test:coverage": "nyc npm run test",
     "test:debug": "env DEBUG=markdown-table-formatter mocha --reporter spec \"test/**/*.test.js\""
@@ -41,11 +41,13 @@
     "optionator": "^0.9.4"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.23.3",
+    "@eslint/js": "^9.39.4",
     "eslint": "^9.0.0",
+    "globals": "^17.4.0",
     "mega-linter-runner": "^9.0.0",
     "mocha": "^11.0.0",
     "nyc": "^18.0.0",
+    "prettier": "^3.8.1",
     "which": "^6.0.0"
   },
   "engines": {
