@@ -37,7 +37,7 @@
     "find-package-json": "^1.2.0",
     "fs-extra": "^11.1.1",
     "glob": "^13.0.0",
-    "markdown-table-prettify": "^3.6.0",
+    "markdown-table-prettify": "^4.0.0",
     "optionator": "^0.9.4"
   },
   "devDependencies": {
