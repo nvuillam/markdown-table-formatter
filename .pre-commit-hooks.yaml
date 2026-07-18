@@ -1,0 +1,6 @@
+- id: markdown-table-formatter
+  name: markdown-table-formatter
+  description: Format Markdown tables to a consistent column width.
+  entry: markdown-table-formatter
+  language: node
+  types: [markdown]
