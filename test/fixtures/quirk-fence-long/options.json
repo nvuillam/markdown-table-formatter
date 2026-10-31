@@ -1,0 +1,3 @@
+{
+  "quirk": "Tables inside nested/long fences are code and must not be formatted"
+}

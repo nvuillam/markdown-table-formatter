@@ -29,10 +29,7 @@ describe("Tests", () => {
   });
 
   it("should format all markdown files under current directory", async () => {
-    const tmpDir = path.join(
-      os.tmpdir(),
-      "tmp_test_markdown_table_formatter_" + Math.random(),
-    );
+    const tmpDir = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
     await fse.ensureDir(tmpDir);
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
@@ -51,10 +48,7 @@ describe("Tests", () => {
   });
 
   it("should format all markdown files found with glob expression", async () => {
-    const tmpDir = path.join(
-      os.tmpdir(),
-      "tmp_test_markdown_table_formatter_" + Math.random(),
-    );
+    const tmpDir = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
     await fse.ensureDir(tmpDir);
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
@@ -73,7 +67,7 @@ describe("Tests", () => {
   });
 
   it("should format a single file", async () => {
-    const file_bad_tmp = os.tmpdir() + "/" + TEST_FILE_BAD;
+    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const args = [null, null, file_bad_tmp];
     const res = await new MarkdownTableFormatterCli().run(args);
@@ -85,7 +79,7 @@ describe("Tests", () => {
   });
 
   it("should format a single file with column padding override", async () => {
-    const file_bad_tmp = os.tmpdir() + "/" + TEST_FILE_BAD;
+    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const args = [null, null, "--columnpadding", "1", file_bad_tmp];
     const res = await new MarkdownTableFormatterCli().run(args);
@@ -97,9 +91,9 @@ describe("Tests", () => {
   });
 
   it("should format multiple files", async () => {
-    const file_bad_tmp = os.tmpdir() + "/" + TEST_FILE_BAD;
+    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
-    const file_bad_tmp2 = os.tmpdir() + "/x/" + TEST_FILE_BAD;
+    const file_bad_tmp2 = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/x/" + TEST_FILE_BAD;
     fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
     const args = [null, null, file_bad_tmp, file_bad_tmp2];
     const res = await new MarkdownTableFormatterCli().run(args);
