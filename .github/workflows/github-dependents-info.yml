@@ -29,14 +29,15 @@ jobs:
     steps:
       # Git Checkout
       - name: Checkout Code
-        uses: actions/checkout@v6
+        # zizmor: ignore[artipacked] credentials are needed to push commits in later steps
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       # Collect data & generate markdown
       - name: GitHub Dependents Info
-        uses: nvuillam/github-dependents-info@main # If you trust me enough you can replace version by "main" :)
+        uses: nvuillam/github-dependents-info@1f9942cfd8b7efcdc6e74591ab9c629c76db2ecf # main
         # See documentation for variables details: https://github.com/nvuillam/github-dependents-info?tab=readme-ov-file#%EF%B8%8F-usage
         with:
           repo: ${{ github.repository }}
@@ -55,7 +56,7 @@ jobs:
       # Create pull request
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN  }}
           branch: github-dependents-info-auto-update
@@ -65,6 +66,9 @@ jobs:
           body: "_Generated with [github-dependents-info](https://github.com/nvuillam/github-dependents-info), by [Nicolas Vuillamy](https://github.com/nvuillam)_"
           labels: documentation
       - name: Create PR output
+        env:
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
         run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Number - $PR_NUMBER"
+          echo "Pull Request URL - $PR_URL"

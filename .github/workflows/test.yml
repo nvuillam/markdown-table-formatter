@@ -2,7 +2,8 @@ name: Test
 
 on: [push, pull_request]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   test_rust:
@@ -10,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install
       - name: Check formatting
@@ -28,8 +31,10 @@ jobs:
         node-version: ["22.17", 22, 24]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "${{ matrix.node-version }}"
           registry-url: "https://registry.npmjs.org"
@@ -45,8 +50,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
@@ -62,8 +69,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
