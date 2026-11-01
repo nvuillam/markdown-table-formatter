@@ -30,6 +30,7 @@ The formatting rules come from [markdown-table-prettify](https://github.com/dark
   - [Options](#options)
 - [Examples](#examples)
 - [Continuous Integration](#continuous-integration)
+- [pre-commit hook](#pre-commit-hook)
 - [Ignoring Code Blocks](#ignoring-code-blocks)
 - [Debug](#debug)
 - [Contribute](#contribute)
@@ -108,6 +109,20 @@ You can see **more examples in** [**test methods**](https://github.com/nvuillam/
 ## Continuous Integration
 
 You can automatically check markdown tables formatting and fix it using [MegaLinter](https://github.com/oxsecurity/megalinter/), that embeds markdown-table-formatter out of the box
+
+## pre-commit hook
+
+Format markdown tables of committed files with [pre-commit](https://pre-commit.com), by adding to `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/nvuillam/markdown-table-formatter
+    rev: v2.0.0
+    hooks:
+      - id: markdown-table-formatter
+```
+
+The hook formats tables of staged markdown files in place: the commit stops when a file was updated, so you can review and stage the changes.
 
 ## Ignoring Code Blocks
 

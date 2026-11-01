@@ -20,6 +20,8 @@
   - `--version` displayed the version of the calling project when run from an npm script
   - Errors (missing file, invalid option) display a short message instead of a stack trace
 - Debug logs: use `NODE_DEBUG=markdown-table-formatter` instead of `DEBUG=markdown-table-formatter`
+- Add pre-commit hook definition (`.pre-commit-hooks.yaml`), by [@bittner](https://github.com/bittner)
+- The built WebAssembly engine is committed, so that installs from git (pre-commit, `npm install github:...`) do not need a Rust toolchain
 - Tests: 80+ golden fixtures shared by JavaScript and Rust tests, black-box CLI tests
 
 ## [1.7.0] 2025-12-27

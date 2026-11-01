@@ -12,7 +12,7 @@
   "scripts": {
     "build:wasm": "node scripts/build-wasm.js",
     "lint:fix": "eslint --fix && prettier --write \"./lib/**/*.{js,jsx,json}\" --tab-width 4 --print-width 150",
-    "prepack": "npm run build:wasm",
+    "prepack": "node scripts/build-wasm.js --if-needed",
     "pretest": "npm run build:wasm",
     "test": "node --test --test-timeout=300000 \"test/**/*.test.js\"",
     "test:coverage": "node --test --test-timeout=300000 --experimental-test-coverage --test-coverage-include=\"lib/**\" \"test/**/*.test.js\"",
