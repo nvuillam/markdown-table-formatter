@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.1.0] 2026-11-01
+
 - Core: Faster on large sets of files (about 1.6x on 1000 files)
   - Up to 32 files are read and written at the same time (results keep the order of the files)
   - File search no longer runs a stat call on each found file
