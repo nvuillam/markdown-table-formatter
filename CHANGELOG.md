@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0] Unreleased
+## [2.0.0] 2026-11-01
 
 - Core: New formatting engine written in Rust and compiled to WebAssembly, embedded in the npm package
   - Same package on every platform (Windows, macOS, Linux, x64 and arm64), no native binary nor install script
