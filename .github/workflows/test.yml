@@ -22,6 +22,47 @@ jobs:
         run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
       - name: Rust tests (unit + golden fixtures)
         run: cargo test --manifest-path rust/Cargo.toml
+      # lib/wasm is committed (installs from git need no Rust toolchain): it must match the Rust sources
+      - name: Check that the committed WebAssembly engine is up to date
+        run: |
+          node scripts/build-wasm.js
+          git diff --exit-code --stat lib/wasm || {
+            git diff --summary lib/wasm
+            git show HEAD:lib/wasm/markdown_table_formatter.wasm > "$RUNNER_TEMP/committed.wasm"
+            node scripts/compare-wasm.js "$RUNNER_TEMP/committed.wasm" lib/wasm/markdown_table_formatter.wasm
+            echo "::error::lib/wasm/markdown_table_formatter.wasm is outdated: run 'npm run build:wasm' and commit it"
+            exit 1
+          }
+
+  test_pre_commit:
+    name: Test - pre-commit hook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: "24.x"
+      - name: Install pre-commit
+        run: pipx install pre-commit
+      # Installs the hook from a git clone of this repository, as pre-commit users do (no Rust toolchain)
+      - name: Run the hook on a badly formatted file, then on the formatted file
+        run: |
+          set -u
+          REPO="$PWD"
+          TMP="$(mktemp -d)"
+          cp test/fixtures/align-mixed/input.md "$TMP/table.md"
+          cd "$TMP"
+          git init -q
+          git add table.md
+          if pre-commit try-repo "$REPO" markdown-table-formatter --files table.md; then
+            echo "::error::the hook should fail when it formats a file"
+            exit 1
+          fi
+          diff "$REPO/test/fixtures/align-mixed/expected.md" table.md
+          pre-commit try-repo "$REPO" markdown-table-formatter --files table.md
 
   test_linux:
     name: Test - Ubuntu Node ${{ matrix.node-version }}
@@ -55,7 +96,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
-          node-version: "24.x"
+          node-version: "26.x"
           registry-url: "https://registry.npmjs.org"
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install
@@ -74,7 +115,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
-          node-version: "24.x"
+          node-version: "26.x"
           registry-url: "https://registry.npmjs.org"
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install

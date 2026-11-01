@@ -1,2 +1,5 @@
 # Golden fixtures must keep their exact bytes (CRLF, LF, missing final newline)
 test/fixtures/** -text
+
+# Built engine, committed so that installs from git (pre-commit) need no Rust toolchain
+*.wasm binary
