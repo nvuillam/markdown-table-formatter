@@ -69,6 +69,11 @@
     "zizmor",
     "artipacked",
     "codegen",
-    "FEFF"
+    "FEFF",
+    "bittner",
+    "rustflags",
+    "RUSTFLAGS",
+    "pipx",
+    "mktemp"
   ]
 }
