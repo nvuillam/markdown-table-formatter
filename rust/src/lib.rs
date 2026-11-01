@@ -31,10 +31,16 @@ pub fn format_tables(text: &str, options: &Options) -> String {
         .collect();
     let code = code_blocks::find_code_lines(&block_lines);
 
-    let mut contents: Vec<Cow<str>> = doc.lines.iter().map(|line| Cow::Borrowed(line.content)).collect();
+    let mut contents: Vec<Cow<str>> = doc
+        .lines
+        .iter()
+        .map(|line| Cow::Borrowed(line.content))
+        .collect();
     let mut from = 0;
     while let Some(range) = finder::find_next(&contents, &code, from) {
-        if let Some(formatted) = table::format_table(&contents[range.start..=range.end], options.column_padding) {
+        if let Some(formatted) =
+            table::format_table(&contents[range.start..=range.end], options.column_padding)
+        {
             for (offset, line) in formatted.into_iter().enumerate() {
                 contents[range.start + offset] = Cow::Owned(line);
             }

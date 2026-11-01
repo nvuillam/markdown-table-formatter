@@ -5,7 +5,9 @@
     "**/.git/**",
     "package-lock.json",
     ".vscode",
-    "**/docs/**"
+    "**/docs/**",
+    "**/test/fixtures/**",
+    "**/rust/target/**"
   ],
   "language": "en",
   "version": "0.1",
@@ -51,6 +53,17 @@
     "tropicalraisel",
     "venv",
     "wesh",
-    "xshimon"
+    "xshimon",
+    "rustup",
+    "rustfmt",
+    "clippy",
+    "debuglog",
+    "hangul",
+    "kana",
+    "idempotency",
+    "mtf",
+    "cdylib",
+    "rlib",
+    "wasm"
   ]
 }

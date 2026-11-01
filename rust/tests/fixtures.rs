@@ -42,5 +42,10 @@ fn golden_fixtures() {
         }
     }
     assert!(count > 50, "only {count} fixtures found");
-    assert!(failures.is_empty(), "{} failing fixtures:\n{}", failures.len(), failures.join("\n"));
+    assert!(
+        failures.is_empty(),
+        "{} failing fixtures:\n{}",
+        failures.len(),
+        failures.join("\n")
+    );
 }

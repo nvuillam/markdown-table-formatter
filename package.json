@@ -1,7 +1,7 @@
 {
   "name": "markdown-table-formatter",
-  "version": "1.7.0",
-  "description": "Format markdown tables in files",
+  "version": "2.0.0",
+  "description": "Format markdown tables in files (Rust engine compiled to WebAssembly, no dependencies)",
   "main": "./lib/index.js",
   "files": [
     "lib/"
@@ -10,10 +10,14 @@
     "markdown-table-formatter": "lib/index.js"
   },
   "scripts": {
+    "build:wasm": "node scripts/build-wasm.js",
     "lint:fix": "eslint **/*.js --fix && prettier --write \"./lib/**/*.{js,jsx,json}\" --tab-width 4 --print-width 150",
+    "prepack": "npm run build:wasm",
+    "pretest": "npm run build:wasm",
     "test": "mocha \"test/**/*.test.js\"",
     "test:coverage": "nyc npm run test",
-    "test:debug": "env DEBUG=markdown-table-formatter mocha --reporter spec \"test/**/*.test.js\""
+    "test:rust": "cargo test --manifest-path rust/Cargo.toml",
+    "test:debug": "env NODE_DEBUG=markdown-table-formatter mocha --reporter spec \"test/**/*.test.js\""
   },
   "repository": {
     "type": "git",
@@ -32,14 +36,6 @@
     "url": "https://github.com/nvuillam/markdown-table-formatter/issues"
   },
   "homepage": "https://github.com/nvuillam/markdown-table-formatter#readme",
-  "dependencies": {
-    "debug": "^4.3.4",
-    "find-package-json": "^1.2.0",
-    "fs-extra": "^11.1.1",
-    "glob": "^13.0.0",
-    "markdown-table-prettify": "^3.6.0",
-    "optionator": "^0.9.4"
-  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
     "eslint": "^9.0.0",

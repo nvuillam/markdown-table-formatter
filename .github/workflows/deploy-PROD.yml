@@ -45,6 +45,9 @@ jobs:
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
+      # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
       - run: npm install
       - run: npm run test:coverage
       - run: git config --global user.email "nicolas.vuillamy@gmail.com"

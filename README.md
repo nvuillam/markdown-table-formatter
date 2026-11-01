@@ -13,7 +13,11 @@
 [![License](https://img.shields.io/npm/l/markdown-table-formatter.svg)](https://github.com/nvuillam/markdown-table-formatter/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Format markdown tables in files, using embedded [markdown-table-prettify](https://www.npmjs.com/package/markdown-table-prettify)
+Format markdown tables in files, with a fast formatting engine written in Rust and embedded as WebAssembly.
+
+No dependencies, the same npm package works on every platform (Windows, macOS, Linux, x64 and arm64) with Node.js 18+.
+
+The formatting rules come from [markdown-table-prettify](https://github.com/darkriszty/MarkdownTablePrettify-VSCodeExt) 4.x, plus some fixes: tables in code blocks are left untouched and column widths follow the Unicode display width (CJK, kana, hangul, emoji...).
 
 [![Banner](https://raw.githubusercontent.com/nvuillam/markdown-table-formatter/master/docs/assets/images/banner.jpg)](https://github.com/nvuillam/markdown-table-formatter#readme)
 
@@ -27,6 +31,7 @@ Format markdown tables in files, using embedded [markdown-table-prettify](https:
 - [Examples](#examples)
 - [Continuous Integration](#continuous-integration)
 - [Ignoring Code Blocks](#ignoring-code-blocks)
+- [Debug](#debug)
 - [Contribute](#contribute)
 - [Release notes](#release-notes)
 
@@ -52,12 +57,13 @@ markdown-table-formatter [OPTIONS] (file(s) or glob expression)
 
 ### Options
 
-| Parameter      | Description                       | Default value |
-|----------------|-----------------------------------|---------------|
-| -c<br/>--check | Check only, does not update files | `false`       |
-| -p<br/>--columnpadding   | Override column padding number of spaces |
-| -h<br/>--help    | Displays help                     | <!-- -->      |
-| -v<br/>--version | Displays version                  | <!-- -->      |
+| Parameter              | Description                              | Default value |
+|------------------------|------------------------------------------|---------------|
+| -c<br/>--check         | Check only, does not update files        | `false`       |
+| -p<br/>--columnpadding | Override column padding number of spaces | `0`           |
+| -z<br/>--verbose       | Verbose mode                             | `false`       |
+| -h<br/>--help          | Displays help                            | <!-- -->      |
+| -v<br/>--version       | Displays version                         | <!-- -->      |
 
 ## Examples
 
@@ -108,6 +114,12 @@ You can automatically check markdown tables formatting and fix it using [MegaLin
 You may wish to ignore specific markdown content, especially when using with [Megalinter](https://github.com/oxsecurity/megalinter) or [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 
 To achieve this, place tags `<!-- markdown-table-prettify-ignore-start -->` and `<!-- markdown-table-prettify-ignore-end -->` around the content you want markdown-table-formatter to ignore.
+
+Tables inside fenced code blocks (` ``` ` or `~~~`) and indented code blocks are never formatted.
+
+## Debug
+
+Set environment variable `NODE_DEBUG=markdown-table-formatter` to display debug logs.
 
 ## Contribute
 

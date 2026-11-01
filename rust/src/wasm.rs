@@ -24,7 +24,9 @@ pub extern "C" fn mtf_alloc(len: usize) -> *mut u8 {
 pub unsafe extern "C" fn mtf_format(ptr: *mut u8, len: usize, column_padding: u32) -> *const u8 {
     let input = Vec::from_raw_parts(ptr, len, len);
     let text = String::from_utf8_lossy(&input);
-    let options = crate::Options { column_padding: column_padding as usize };
+    let options = crate::Options {
+        column_padding: column_padding as usize,
+    };
     let output = crate::format_tables(&text, &options);
     RESULT.with(|result| {
         *result.borrow_mut() = output;

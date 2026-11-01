@@ -111,7 +111,9 @@ fn opening_fence(line: &str) -> Option<(u8, usize)> {
 
 fn is_closing_fence(line: &str, fence_char: u8, fence_len: usize) -> bool {
     match fence_run(line) {
-        Some((c, len, rest)) => c == fence_char && len >= fence_len && rest.chars().all(is_js_whitespace),
+        Some((c, len, rest)) => {
+            c == fence_char && len >= fence_len && rest.chars().all(is_js_whitespace)
+        }
         None => false,
     }
 }
@@ -127,17 +129,29 @@ mod tests {
 
     #[test]
     fn fences() {
-        assert_eq!(code("a\n```\n| x |\n```\nb"), vec![false, true, true, true, false]);
-        assert_eq!(code("~~~~\n~~~\n| x |\n~~~~\nb"), vec![true, true, true, true, false]);
+        assert_eq!(
+            code("a\n```\n| x |\n```\nb"),
+            vec![false, true, true, true, false]
+        );
+        assert_eq!(
+            code("~~~~\n~~~\n| x |\n~~~~\nb"),
+            vec![true, true, true, true, false]
+        );
         assert_eq!(code("```js\n| x |"), vec![true, true]);
-        assert_eq!(code("- ```\n  | x |\n  ```\nb"), vec![true, true, true, false]);
+        assert_eq!(
+            code("- ```\n  | x |\n  ```\nb"),
+            vec![true, true, true, false]
+        );
         // inline code is not a fence
         assert_eq!(code("``` a ``` b\n| x |"), vec![false, false]);
     }
 
     #[test]
     fn indented_code() {
-        assert_eq!(code("a\n\n    | x |\n    | y |\n\nb"), vec![false, false, true, true, false, false]);
+        assert_eq!(
+            code("a\n\n    | x |\n    | y |\n\nb"),
+            vec![false, false, true, true, false, false]
+        );
         // a paragraph continuation is not code
         assert_eq!(code("a\n    | x |"), vec![false, false]);
         // inside a list, indentation is list content

@@ -43,13 +43,15 @@ fn build<S: AsRef<str>>(lines: &[S]) -> Option<Table<'_>> {
         .filter(|(i, _)| *i != 1)
         .map(|(_, line)| split_line(line).into_iter().map(js_trim).collect())
         .collect();
-    let mut alignments: Vec<Alignment> = split_line(lines[1]).into_iter().map(alignment_of).collect();
+    let mut alignments: Vec<Alignment> =
+        split_line(lines[1]).into_iter().map(alignment_of).collect();
     let column_count = rows[0].len();
     if alignments.len() != column_count || rows.iter().any(|row| row.len() != column_count) {
         return None;
     }
 
-    let is_column_empty = |rows: &Vec<Vec<&str>>, col: usize| rows.iter().all(|row| row[col].is_empty());
+    let is_column_empty =
+        |rows: &Vec<Vec<&str>>, col: usize| rows.iter().all(|row| row[col].is_empty());
     let had_left_border = is_column_empty(&rows, 0);
     let had_right_border = is_column_empty(&rows, column_count - 1);
     if had_left_border {
@@ -70,7 +72,11 @@ fn build<S: AsRef<str>>(lines: &[S]) -> Option<Table<'_>> {
 
     // Indentation is kept with a clear left border, or when indented with tabs
     let indentation = left_pad(&lines);
-    let left_pad = if had_left_border || indentation.starts_with('\t') { indentation } else { "" };
+    let left_pad = if had_left_border || indentation.starts_with('\t') {
+        indentation
+    } else {
+        ""
+    };
 
     let mut longest = vec![0; alignments.len()];
     for row in &rows {
@@ -141,7 +147,11 @@ fn cell_padding(table: &Table, value: &str, col: usize) -> (usize, usize) {
         Position::Middle
     };
     // Without a left border, the first column is never padded on the left
-    let alignment = if col == 0 && !table.has_left_border { Alignment::Left } else { table.alignments[col] };
+    let alignment = if col == 0 && !table.has_left_border {
+        Alignment::Left
+    } else {
+        table.alignments[col]
+    };
     let longest = table.longest[col];
     let width = display_width(value);
     let free = if longest > 0 { longest - width } else { 1 };
@@ -150,21 +160,37 @@ fn cell_padding(table: &Table, value: &str, col: usize) -> (usize, usize) {
 
     match alignment {
         Alignment::Center => {
-            let extra = if position == Position::First && !left_border { 1 } else { 2 };
+            let extra = if position == Position::First && !left_border {
+                1
+            } else {
+                2
+            };
             let total = free + extra;
-            let right = if position == Position::Last && !right_border { 0 } else { total.div_ceil(2) };
+            let right = if position == Position::Last && !right_border {
+                0
+            } else {
+                total.div_ceil(2)
+            };
             (total / 2, right)
         }
         Alignment::Right => {
-            let extra = if position == Position::First && !left_border { 0 } else { 1 };
-            let right = if position == Position::Last && !left_border { 0 } else { 1 };
+            let extra = if position == Position::First && !left_border {
+                0
+            } else {
+                1
+            };
+            let right = if position == Position::Last && !left_border {
+                0
+            } else {
+                1
+            };
             (free + extra, right)
         }
         Alignment::Left | Alignment::NotSet => match position {
             Position::First => (usize::from(left_border), base_right),
             Position::Middle => (1, base_right),
             Position::Last => {
-                let left = usize::from(!(value.is_empty() && !right_border));
+                let left = usize::from(!value.is_empty() || right_border);
                 (left, if right_border { base_right } else { 0 })
             }
         },
@@ -253,7 +279,10 @@ mod tests {
     #[test]
     fn bordered_table() {
         let lines = ["| a | bb |", "|:-|-:|", "| 111 | 2 |"];
-        assert_eq!(format_table(&lines, 0).unwrap(), vec!["| a   | bb |", "|:----|---:|", "| 111 |  2 |"]);
+        assert_eq!(
+            format_table(&lines, 0).unwrap(),
+            vec!["| a   | bb |", "|:----|---:|", "| 111 |  2 |"]
+        );
     }
 
     #[test]

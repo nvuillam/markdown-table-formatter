@@ -38,7 +38,11 @@ pub fn find_next<S: AsRef<str>>(lines: &[S], code: &[bool], from: usize) -> Opti
     None
 }
 
-fn range_at_separator<S: AsRef<str>>(lines: &[S], code: &[bool], separator: usize) -> (Option<Range>, bool) {
+fn range_at_separator<S: AsRef<str>>(
+    lines: &[S],
+    code: &[bool],
+    separator: usize,
+) -> (Option<Range>, bool) {
     let separator_cells = split_line(lines[separator].as_ref());
     if !has_valid_separators(&separator_cells) {
         return (None, false);
@@ -64,7 +68,10 @@ fn range_at_separator<S: AsRef<str>>(lines: &[S], code: &[bool], separator: usiz
         }
         last = row;
     }
-    let range = header_valid.then(|| Range { start: separator - 1, end: last });
+    let range = header_valid.then(|| Range {
+        start: separator - 1,
+        end: last,
+    });
     (range, ignore_started)
 }
 
@@ -90,7 +97,11 @@ fn all_dashes_with_border(cells: &[&str]) -> bool {
         return false;
     }
     let start = usize::from(starting_border);
-    let end = if ending_border { cells.len() - 1 } else { cells.len() };
+    let end = if ending_border {
+        cells.len() - 1
+    } else {
+        cells.len()
+    };
     cells[start..end].iter().all(|cell| is_separator_cell(cell))
 }
 
@@ -116,11 +127,20 @@ mod tests {
 
     #[test]
     fn ranges() {
-        assert_eq!(find("t\n| a | b |\n|-|-|\n| 1 | 2 |\nx"), Some(Range { start: 1, end: 3 }));
+        assert_eq!(
+            find("t\n| a | b |\n|-|-|\n| 1 | 2 |\nx"),
+            Some(Range { start: 1, end: 3 })
+        );
         assert_eq!(find("| a | b |\n|-|-|"), Some(Range { start: 0, end: 1 }));
         assert_eq!(find("|-|-|\n| 1 | 2 |"), None);
         assert_eq!(find("| a |\n|-|-|\n| 1 | 2 |"), None);
-        assert_eq!(find(&format!("| a | b |\n|-|-|\n{IGNORE_START}\n| 1 | 2 |")), Some(Range { start: 0, end: 1 }));
-        assert_eq!(find(&format!("{IGNORE_START}\n| a | b |\n|-|-|\n{IGNORE_END}")), None);
+        assert_eq!(
+            find(&format!("| a | b |\n|-|-|\n{IGNORE_START}\n| 1 | 2 |")),
+            Some(Range { start: 0, end: 1 })
+        );
+        assert_eq!(
+            find(&format!("{IGNORE_START}\n| a | b |\n|-|-|\n{IGNORE_END}")),
+            None
+        );
     }
 }

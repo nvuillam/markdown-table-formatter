@@ -2,7 +2,7 @@
 "use strict";
 const assert = require("assert");
 const os = require("os");
-const fse = require("fs-extra");
+const fs = require("fs");
 const path = require("path");
 const { MarkdownTableFormatterCli } = require("../lib/index");
 const {
@@ -12,6 +12,11 @@ const {
   checkStatus,
   checkStdOutIncludes,
 } = require("./helpers/common");
+
+function copyFile(source, target) {
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.copyFileSync(source, target);
+}
 
 describe("Tests", () => {
   beforeEach(beforeEachTestCase);
@@ -29,12 +34,11 @@ describe("Tests", () => {
   });
 
   it("should format all markdown files under current directory", async () => {
-    const tmpDir = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
-    await fse.ensureDir(tmpDir);
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const file_bad_tmp2 = tmpDir + "/x/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
     const args = [null, null];
     const prevCwd = process.cwd();
     process.chdir(tmpDir);
@@ -48,12 +52,11 @@ describe("Tests", () => {
   });
 
   it("should format all markdown files found with glob expression", async () => {
-    const tmpDir = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
-    await fse.ensureDir(tmpDir);
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-"));
     const file_bad_tmp = tmpDir + "/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const file_bad_tmp2 = tmpDir + "/" + "wesh.md";
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
     const args = [null, null, "**/*bad*.md"];
     const prevCwd = process.cwd();
     process.chdir(tmpDir);
@@ -67,8 +70,8 @@ describe("Tests", () => {
   });
 
   it("should format a single file", async () => {
-    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+    const file_bad_tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const args = [null, null, file_bad_tmp];
     const res = await new MarkdownTableFormatterCli().run(args);
     checkStatus(res.status, 0);
@@ -79,8 +82,8 @@ describe("Tests", () => {
   });
 
   it("should format a single file with column padding override", async () => {
-    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+    const file_bad_tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp);
     const args = [null, null, "--columnpadding", "1", file_bad_tmp];
     const res = await new MarkdownTableFormatterCli().run(args);
     checkStatus(res.status, 0);
@@ -91,10 +94,10 @@ describe("Tests", () => {
   });
 
   it("should format multiple files", async () => {
-    const file_bad_tmp = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp);
-    const file_bad_tmp2 = fse.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/x/" + TEST_FILE_BAD;
-    fse.copySync(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
+    const file_bad_tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/" + TEST_FILE_BAD;
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp);
+    const file_bad_tmp2 = fs.mkdtempSync(path.join(os.tmpdir(), "mtf-test-")) + "/x/" + TEST_FILE_BAD;
+    copyFile(path.resolve(TEST_FILE_BAD), file_bad_tmp2);
     const args = [null, null, file_bad_tmp, file_bad_tmp2];
     const res = await new MarkdownTableFormatterCli().run(args);
     checkStatus(res.status, 0);

@@ -1,11 +1,5 @@
 #! /usr/bin/env node
 "use strict";
 
+// Debug logs: set NODE_DEBUG=markdown-table-formatter
 console.log("npm run test initialized");
-// Activate debug log if we are in debug mode
-const debug =
-  typeof v8debug === "object" ||
-  /--debug|--inspect|--inspect-brk/.test(process.execArgv.join(" "));
-if (debug) {
-  require("debug").enable("markdown-table-formatter");
-}
