@@ -27,6 +27,7 @@ jobs:
         run: |
           node scripts/build-wasm.js
           git diff --exit-code --stat lib/wasm || {
+            git diff --summary lib/wasm
             git show HEAD:lib/wasm/markdown_table_formatter.wasm > "$RUNNER_TEMP/committed.wasm"
             node scripts/compare-wasm.js "$RUNNER_TEMP/committed.wasm" lib/wasm/markdown_table_formatter.wasm
             echo "::error::lib/wasm/markdown_table_formatter.wasm is outdated: run 'npm run build:wasm' and commit it"

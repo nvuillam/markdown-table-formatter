@@ -72,6 +72,8 @@
     "FEFF",
     "bittner",
     "rustflags",
-    "RUSTFLAGS"
+    "RUSTFLAGS",
+    "pipx",
+    "mktemp"
   ]
 }

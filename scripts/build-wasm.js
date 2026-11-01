@@ -93,7 +93,9 @@ const built = path.join(
   "markdown_table_formatter.wasm",
 );
 fs.mkdirSync(path.dirname(output), { recursive: true });
-fs.copyFileSync(built, output);
+// Copy the content only: the cargo output is executable on Linux, the committed file is not
+fs.writeFileSync(output, fs.readFileSync(built), { mode: 0o644 });
+fs.chmodSync(output, 0o644);
 console.log(
   `lib/wasm/markdown_table_formatter.wasm (${fs.statSync(built).size} bytes)`,
 );
