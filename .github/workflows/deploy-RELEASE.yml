@@ -1,58 +1,87 @@
 ---
-#######################################
-# Start the job on all push to master #
-#######################################
+# Publish markdown-table-formatter on npm with trusted publishing (OIDC)
+# This single workflow publishes both channels, as npm trusts this workflow file:
+# - beta: on every push to main changing the package (version x.y.z-<timestamp>, dist-tag "beta")
+# - latest: when a GitHub release is created (version from package.json)
+# Both jobs run in a GitHub environment (beta / release) that requires a manual approval
 name: "Deploy release"
 on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/deploy-RELEASE.yml"
+      - "lib/**"
+      - "rust/**"
+      - "package.json"
+      - "README.md"
+      - "CHANGELOG.md"
   release:
-    # Want to run the automation when a release is created
     types: ["created"]
 
 permissions: read-all
 
-###############
-# Set the Job #
-###############
 jobs:
-  build:
-    # Name the Job
-    name: Deploy release on NPM
-    # Set the agent to run on
+  beta:
+    name: Deploy beta on NPM
+    if: github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip deploy')
     runs-on: ubuntu-latest
     environment:
-      name: release
+      name: beta
     permissions:
-      id-token: write # Required for OIDC
+      id-token: write # Required for OIDC (npm trusted publishing)
       contents: read
-    # Only run this on the main repo
-    if: "!contains(github.event.head_commit.message, 'skip deploy')"
-    ##################
-    # Load all steps #
-    ##################
     steps:
-      ##########################
-      # Checkout the code base #
-      ##########################
       - name: Checkout Code
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
           persist-credentials: false
-
-      ##############################################################
-      # Publish updated version of markdown-table-formatter on NPM #
-      ##############################################################
       - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
+      # Trusted publishing (OIDC) requires npm 11.5.1+
+      - name: Use npm with trusted publishing support
+        run: npm install -g npm@^11.5.1
       # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install
-      - run: npm install
+      - run: npm ci
       - run: npm run test:coverage
-      - run: git status && git stash
+      - name: Set beta version
+        run: npm version prerelease --preid="$(date '+%Y%m%d%H%M')" --no-git-tag-version
+      # Authenticated with OIDC, provenance is generated automatically
+      - run: npm publish --tag beta
+
+  release:
+    name: Deploy release on NPM
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    environment:
+      name: release
+    permissions:
+      id-token: write # Required for OIDC (npm trusted publishing)
+      contents: read
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+      # Trusted publishing (OIDC) requires npm 11.5.1+
+      - name: Use npm with trusted publishing support
+        run: npm install -g npm@^11.5.1
+      # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
+      - run: npm ci
+      - run: npm run test:coverage
+      # Authenticated with OIDC, provenance is generated automatically
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

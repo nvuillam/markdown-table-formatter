@@ -15,6 +15,7 @@
     "prepack": "node scripts/build-wasm.js --if-needed",
     "pretest": "npm run build:wasm",
     "test": "node --test --test-timeout=300000 \"test/**/*.test.js\"",
+    "pretest:coverage": "npm run build:wasm",
     "test:coverage": "node --test --test-timeout=300000 --experimental-test-coverage --test-coverage-include=\"lib/**\" \"test/**/*.test.js\"",
     "test:rust": "cargo test --manifest-path rust/Cargo.toml",
     "test:debug": "env NODE_DEBUG=markdown-table-formatter node --test --test-timeout=300000 --test-reporter=spec \"test/**/*.test.js\""
