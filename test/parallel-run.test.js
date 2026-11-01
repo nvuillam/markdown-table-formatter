@@ -90,7 +90,7 @@ describe("Parallel run", () => {
     fs.mkdirSync(path.join(dir, "sub"));
     try {
       fs.symlinkSync(path.join(dir, "f000.md"), path.join(dir, "link.md"));
-      fs.symlinkSync(path.join(dir, "sub"), path.join(dir, "dirlink.md"));
+      fs.symlinkSync(path.join(dir, "sub"), path.join(dir, "folder-link.md"));
     } catch {
       t.skip("symbolic links not allowed on this machine");
       return;
