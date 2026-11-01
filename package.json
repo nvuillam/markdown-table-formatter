@@ -1,6 +1,6 @@
 {
   "name": "markdown-table-formatter",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Format markdown tables in files (Rust engine compiled to WebAssembly, no dependencies)",
   "main": "./lib/index.js",
   "files": [
