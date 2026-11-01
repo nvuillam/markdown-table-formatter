@@ -1,0 +1,3 @@
+{
+  "quirk": "A table with only empty columns made the engine crash (4.x) or write broken rows (3.x)"
+}

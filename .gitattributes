@@ -1,0 +1,2 @@
+# Golden fixtures must keep their exact bytes (CRLF, LF, missing final newline)
+test/fixtures/** -text

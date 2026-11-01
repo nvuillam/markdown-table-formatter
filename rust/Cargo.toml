@@ -1,0 +1,21 @@
+[package]
+name = "markdown-table-formatter"
+version = "2.0.0"
+edition = "2021"
+description = "Format markdown tables (engine of the markdown-table-formatter npm package)"
+license = "MIT"
+repository = "https://github.com/nvuillam/markdown-table-formatter"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+unicode-width = "0.2"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

@@ -34,23 +34,28 @@ jobs:
       # Checkout the code base #
       ##########################
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       ##############################################################
       # Publish updated version of markdown-table-formatter on NPM #
       ##############################################################
-      - uses: actions/setup-node@v6.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+      # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
       - run: npm install
       - run: npm run test:coverage
       - run: git config --global user.email "nicolas.vuillamy@gmail.com"
       - run: git config --global user.name "Nicolas.Vuillamy"
       - run: git status && git stash
       - run: npm version prerelease --preid="$(date '+%Y%m%d%H%M')"
-      - run: npm publish --tag beta
+      - run: npm publish --tag beta # zizmor: ignore[use-trusted-publishing] beta releases still publish with NPM_TOKEN, move to npm trusted publishing later
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

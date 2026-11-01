@@ -2,25 +2,47 @@ name: Test
 
 on: [push, pull_request]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
+  test_rust:
+    name: Test - Rust engine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
+      - name: Check formatting
+        run: cargo fmt --manifest-path rust/Cargo.toml --check
+      - name: Clippy
+        run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
+      - name: Rust tests (unit + golden fixtures)
+        run: cargo test --manifest-path rust/Cargo.toml
+
   test_linux:
-    name: Test - Ubuntu Node 24
+    name: Test - Ubuntu Node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20, 22, 24]
+        node-version: ["22.17", 22, 24]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "${{ matrix.node-version }}"
           registry-url: "https://registry.npmjs.org"
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
       - name: Install dependencies and link
         run: npm ci && npm link
-      - name: Run tests
+      - name: Run tests (builds the WebAssembly engine first)
         run: npm run test
 
   test_windows:
@@ -28,14 +50,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
       - name: Install dependencies and link
         run: npm ci && npm link
-      - name: Run tests
+      - name: Run tests (builds the WebAssembly engine first)
         run: npm run test
 
   test_mac:
@@ -43,12 +69,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
-      - uses: actions/setup-node@v6.2.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
+      - name: Install Rust toolchain (from rust-toolchain.toml)
+        run: rustup toolchain install
       - name: Install dependencies and link
         run: npm ci && npm link
-      - name: Run tests
+      - name: Run tests (builds the WebAssembly engine first)
         run: npm run test
