@@ -11,7 +11,7 @@ on:
       - ".github/workflows/**"
       - "lib/**"
       - "README.md"
-      - "CHANGELOG.mg"
+      - "CHANGELOG.md"
 
 permissions: read-all
 
@@ -24,6 +24,9 @@ jobs:
     name: Deploy beta on NPM
     # Set the agent to run on
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC (npm trusted publishing)
+      contents: read
     # Only run this on the main repo
     if: "!contains(github.event.head_commit.message, 'skip deploy')"
     ##################
@@ -47,6 +50,9 @@ jobs:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
+      # Trusted publishing (OIDC) requires npm 11.5.1+
+      - name: Use npm with trusted publishing support
+        run: npm install -g npm@^11.5.1
       # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install
@@ -56,6 +62,5 @@ jobs:
       - run: git config --global user.name "Nicolas.Vuillamy"
       - run: git status && git stash
       - run: npm version prerelease --preid="$(date '+%Y%m%d%H%M')"
-      - run: npm publish --tag beta # zizmor: ignore[use-trusted-publishing] beta releases still publish with NPM_TOKEN, move to npm trusted publishing later
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Authenticated with OIDC (npm trusted publisher), provenance is generated automatically
+      - run: npm publish --tag beta

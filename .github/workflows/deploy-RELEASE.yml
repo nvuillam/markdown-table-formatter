@@ -47,12 +47,14 @@ jobs:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
+      # Trusted publishing (OIDC) requires npm 11.5.1+
+      - name: Use npm with trusted publishing support
+        run: npm install -g npm@^11.5.1
       # The WebAssembly engine is built from rust/ (npm prepack and pretest hooks)
       - name: Install Rust toolchain (from rust-toolchain.toml)
         run: rustup toolchain install
       - run: npm install
       - run: npm run test:coverage
       - run: git status && git stash
+      # Authenticated with OIDC (npm trusted publisher), provenance is generated automatically
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
