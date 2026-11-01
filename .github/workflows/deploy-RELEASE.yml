@@ -3,6 +3,7 @@
 # This single workflow publishes both channels, as npm trusts this workflow file:
 # - beta: on every push to main changing the package (version x.y.z-<timestamp>, dist-tag "beta")
 # - latest: when a GitHub release is created (version from package.json)
+# Both jobs run in a GitHub environment (beta / release) that requires a manual approval
 name: "Deploy release"
 on:
   push:
@@ -25,6 +26,8 @@ jobs:
     name: Deploy beta on NPM
     if: github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip deploy')
     runs-on: ubuntu-latest
+    environment:
+      name: beta
     permissions:
       id-token: write # Required for OIDC (npm trusted publishing)
       contents: read
