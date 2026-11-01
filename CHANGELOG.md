@@ -20,6 +20,7 @@
   - `--version` displayed the version of the calling project when run from an npm script
   - Errors (missing file, invalid option) display a short message instead of a stack trace
 - Debug logs: use `NODE_DEBUG=markdown-table-formatter` instead of `DEBUG=markdown-table-formatter`
+- CI: Publish to npm with trusted publishing (OIDC) and provenance, beta and latest versions from a single workflow
 - Tests: 80+ golden fixtures shared by JavaScript and Rust tests, black-box CLI tests
 
 ## [1.7.0] 2025-12-27
