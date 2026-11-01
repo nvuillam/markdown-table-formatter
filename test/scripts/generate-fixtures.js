@@ -12,7 +12,9 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { MarkdownTableFormatter } = require("../../lib/markdown-table-formatter");
+const {
+  MarkdownTableFormatter,
+} = require("../../lib/markdown-table-formatter");
 const { listFixtures } = require("../helpers/fixtures");
 
 const args = process.argv.slice(2);
@@ -22,13 +24,21 @@ const only = args.filter((arg) => !arg.startsWith("--"));
 let written = 0;
 for (const fixture of listFixtures()) {
   const expectedFile = path.join(fixture.dir, "expected.md");
-  const selected = only.length > 0 ? only.includes(fixture.name) : force || !fs.existsSync(expectedFile);
+  const selected =
+    only.length > 0
+      ? only.includes(fixture.name)
+      : force || !fs.existsSync(expectedFile);
   if (!selected) {
     continue;
   }
-  const expected = MarkdownTableFormatter.formatText(fixture.input, fixture.options);
+  const expected = MarkdownTableFormatter.formatText(
+    fixture.input,
+    fixture.options,
+  );
   fs.writeFileSync(expectedFile, expected);
   written++;
-  console.log(`- ${fixture.name}${expected === fixture.input ? " (unchanged)" : ""}`);
+  console.log(
+    `- ${fixture.name}${expected === fixture.input ? " (unchanged)" : ""}`,
+  );
 }
 console.log(`${written} expected.md file(s) written`);

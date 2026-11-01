@@ -19,3 +19,6 @@ FILTER_REGEX_EXCLUDE: (test_files|test/fixtures|rust/target|lib/wasm)
 SHOW_ELAPSED_TIME: true
 FILEIO_REPORTER: true
 MARKDOWN_FILTER_REGEX_EXCLUDE: (docs/)
+# zizmor needs the GitHub API to audit actions referenced by uses: clauses
+ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
+  - GITHUB_TOKEN

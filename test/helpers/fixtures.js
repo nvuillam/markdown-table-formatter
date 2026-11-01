@@ -16,13 +16,17 @@ function listFixtures() {
       const dir = path.join(FIXTURES_DIR, entry.name);
       const optionsFile = path.join(dir, "options.json");
       const expectedFile = path.join(dir, "expected.md");
-      const options = fs.existsSync(optionsFile) ? JSON.parse(fs.readFileSync(optionsFile, "utf8")) : {};
+      const options = fs.existsSync(optionsFile)
+        ? JSON.parse(fs.readFileSync(optionsFile, "utf8"))
+        : {};
       return {
         name: entry.name,
         dir,
         options,
         input: fs.readFileSync(path.join(dir, "input.md"), "utf8"),
-        expected: fs.existsSync(expectedFile) ? fs.readFileSync(expectedFile, "utf8") : null,
+        expected: fs.existsSync(expectedFile)
+          ? fs.readFileSync(expectedFile, "utf8")
+          : null,
       };
     });
 }

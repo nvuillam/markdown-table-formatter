@@ -9,10 +9,21 @@ const root = path.join(__dirname, "..");
 const crateDir = path.join(root, "rust");
 const target = "wasm32-unknown-unknown";
 
-execFileSync("cargo", ["build", "--release", "--target", target], { cwd: crateDir, stdio: "inherit"});
+execFileSync("cargo", ["build", "--release", "--target", target], {
+  cwd: crateDir,
+  stdio: "inherit",
+});
 
-const built = path.join(crateDir, "target", target, "release", "markdown_table_formatter.wasm");
+const built = path.join(
+  crateDir,
+  "target",
+  target,
+  "release",
+  "markdown_table_formatter.wasm",
+);
 const outDir = path.join(root, "lib", "wasm");
 fs.mkdirSync(outDir, { recursive: true });
 fs.copyFileSync(built, path.join(outDir, "markdown_table_formatter.wasm"));
-console.log(`lib/wasm/markdown_table_formatter.wasm (${fs.statSync(built).size} bytes)`);
+console.log(
+  `lib/wasm/markdown_table_formatter.wasm (${fs.statSync(built).size} bytes)`,
+);

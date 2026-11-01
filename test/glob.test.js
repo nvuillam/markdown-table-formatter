@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 "use strict";
+const { before, describe, it } = require("node:test");
 const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
@@ -42,7 +43,16 @@ describe("File discovery (fs.globSync)", () => {
   });
 
   const cases = [
-    ["**/*.md", ["README.md", "docs/a.md", "docs/bad_1.md", "docs/sub/d1.md", "docs/sub/d2.md"]],
+    [
+      "**/*.md",
+      [
+        "README.md",
+        "docs/a.md",
+        "docs/bad_1.md",
+        "docs/sub/d1.md",
+        "docs/sub/d2.md",
+      ],
+    ],
     ["*.md", ["README.md"]],
     ["docs/*.md", ["docs/a.md", "docs/bad_1.md"]],
     ["./docs/*.md", ["docs/a.md", "docs/bad_1.md"]],
@@ -50,7 +60,16 @@ describe("File discovery (fs.globSync)", () => {
     ["docs/sub/d[12].md", ["docs/sub/d1.md", "docs/sub/d2.md"]],
     ["docs/sub/d[!1].md", ["docs/sub/d2.md"]],
     ["docs/{a,bad_1}.md", ["docs/a.md", "docs/bad_1.md"]],
-    ["docs/**/*.{md,txt}", ["docs/a.md", "docs/bad_1.md", "docs/notes.txt", "docs/sub/d1.md", "docs/sub/d2.md"]],
+    [
+      "docs/**/*.{md,txt}",
+      [
+        "docs/a.md",
+        "docs/bad_1.md",
+        "docs/notes.txt",
+        "docs/sub/d1.md",
+        "docs/sub/d2.md",
+      ],
+    ],
     ["docs/?.md", ["docs/a.md"]],
     ["node_modules/**/*.md", []],
     ["docs/su*", []],
@@ -65,6 +84,9 @@ describe("File discovery (fs.globSync)", () => {
 
   it("supports absolute patterns", () => {
     const pattern = dir.split(path.sep).join("/") + "/docs/*.md";
-    assert.deepStrictEqual(globSync(pattern), [path.join(dir, "docs", "a.md"), path.join(dir, "docs", "bad_1.md")]);
+    assert.deepStrictEqual(globSync(pattern), [
+      path.join(dir, "docs", "a.md"),
+      path.join(dir, "docs", "bad_1.md"),
+    ]);
   });
 });

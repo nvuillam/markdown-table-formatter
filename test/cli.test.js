@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 "use strict";
+const { describe, it } = require("node:test");
 const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
@@ -16,7 +17,11 @@ function runCli(args, { cwd = process.cwd() } = {}) {
   const env = { ...process.env };
   delete env.npm_package_version;
   delete env.DEBUG;
-  const res = spawnSync(process.execPath, [CLI, ...args], { cwd, env, encoding: "utf8" });
+  const res = spawnSync(process.execPath, [CLI, ...args], {
+    cwd,
+    env,
+    encoding: "utf8",
+  });
   return { status: res.status, stdout: res.stdout, stderr: res.stderr };
 }
 
@@ -40,9 +45,21 @@ describe("CLI (black-box)", () => {
       it(`${flag} prints usage and all options`, () => {
         const res = runCli([flag]);
         assert.strictEqual(res.status, 0);
-        assert(res.stdout.includes("markdown-table-formatter [options]"), res.stdout);
-        for (const option of ["--check", "--columnpadding", "--help", "--version", "--verbose"]) {
-          assert(res.stdout.includes(option), `help should list ${option}:\n${res.stdout}`);
+        assert(
+          res.stdout.includes("markdown-table-formatter [options]"),
+          res.stdout,
+        );
+        for (const option of [
+          "--check",
+          "--columnpadding",
+          "--help",
+          "--version",
+          "--verbose",
+        ]) {
+          assert(
+            res.stdout.includes(option),
+            `help should list ${option}:\n${res.stdout}`,
+          );
         }
       });
     }
@@ -51,7 +68,10 @@ describe("CLI (black-box)", () => {
       it(`${flag} prints the package version`, () => {
         const res = runCli([flag]);
         assert.strictEqual(res.status, 0);
-        assert.strictEqual(res.stdout.trim(), `markdown-table-formatter version ${VERSION}`);
+        assert.strictEqual(
+          res.stdout.trim(),
+          `markdown-table-formatter version ${VERSION}`,
+        );
       });
     }
   });
@@ -63,7 +83,12 @@ describe("CLI (black-box)", () => {
         const file = copyFixture(BAD, "input.md", dir, "bad.md");
         const res = runCli([flag, file]);
         assert.strictEqual(res.status, 1, res.stdout + res.stderr);
-        assert(res.stdout.includes(`1 files contain markdown tables to format:\n- ${file}`), res.stdout);
+        assert(
+          res.stdout.includes(
+            `1 files contain markdown tables to format:\n- ${file}`,
+          ),
+          res.stdout,
+        );
         assert.strictEqual(read(file), read(path.join(BAD, "input.md")));
       });
     }
@@ -73,7 +98,10 @@ describe("CLI (black-box)", () => {
       const file = copyFixture(GOOD, "input.md", dir, "good.md");
       const res = runCli(["--check", file]);
       assert.strictEqual(res.status, 0, res.stdout + res.stderr);
-      assert(res.stdout.includes("No markdown table formatting has been applied."), res.stdout);
+      assert(
+        res.stdout.includes("No markdown table formatting has been applied."),
+        res.stdout,
+      );
     });
 
     it("lists only the files that need formatting", () => {
@@ -82,7 +110,12 @@ describe("CLI (black-box)", () => {
       const bad = copyFixture(BAD, "input.md", dir, "bad.md");
       const res = runCli(["--check", good, bad]);
       assert.strictEqual(res.status, 1);
-      assert(res.stdout.includes(`1 files contain markdown tables to format:\n- ${bad}`), res.stdout);
+      assert(
+        res.stdout.includes(
+          `1 files contain markdown tables to format:\n- ${bad}`,
+        ),
+        res.stdout,
+      );
       assert(!res.stdout.includes(good), res.stdout);
     });
   });
@@ -94,7 +127,10 @@ describe("CLI (black-box)", () => {
       const res = runCli([file]);
       assert.strictEqual(res.status, 0, res.stdout + res.stderr);
       assert.strictEqual(read(file), read(path.join(BAD, "expected.md")));
-      assert(res.stdout.includes(`Formatted markdown tables in 1 files:\n- ${file}`), res.stdout);
+      assert(
+        res.stdout.includes(`Formatted markdown tables in 1 files:\n- ${file}`),
+        res.stdout,
+      );
     });
 
     it("formats multiple files", () => {
@@ -105,7 +141,10 @@ describe("CLI (black-box)", () => {
       assert.strictEqual(res.status, 0);
       assert.strictEqual(read(file1), read(path.join(BAD, "expected.md")));
       assert.strictEqual(read(file2), read(path.join(BAD, "expected.md")));
-      assert(res.stdout.includes("Formatted markdown tables in 2 files:"), res.stdout);
+      assert(
+        res.stdout.includes("Formatted markdown tables in 2 files:"),
+        res.stdout,
+      );
     });
 
     it("reports nothing to do on a well formatted file", () => {
@@ -113,7 +152,10 @@ describe("CLI (black-box)", () => {
       const file = copyFixture(GOOD, "input.md", dir, "good.md");
       const res = runCli([file]);
       assert.strictEqual(res.status, 0);
-      assert(res.stdout.includes("No markdown table formatting has been applied."), res.stdout);
+      assert(
+        res.stdout.includes("No markdown table formatting has been applied."),
+        res.stdout,
+      );
     });
 
     for (const [args, fixtureName] of [
@@ -126,7 +168,10 @@ describe("CLI (black-box)", () => {
         const file = copyFixture(fixtureDir, "input.md", dir, "file.md");
         const res = runCli([...args, file]);
         assert.strictEqual(res.status, 0, res.stdout + res.stderr);
-        assert.strictEqual(read(file), read(path.join(fixtureDir, "expected.md")));
+        assert.strictEqual(
+          read(file),
+          read(path.join(fixtureDir, "expected.md")),
+        );
       });
     }
 
@@ -136,7 +181,10 @@ describe("CLI (black-box)", () => {
         const file = copyFixture(BAD, "input.md", dir, "bad.md");
         const res = runCli([flag, file]);
         assert.strictEqual(res.status, 0);
-        assert(res.stdout.includes(`Markdown files to analyze:\n- ${file}`), res.stdout);
+        assert(
+          res.stdout.includes(`Markdown files to analyze:\n- ${file}`),
+          res.stdout,
+        );
         assert(res.stdout.includes(`- Updated file ${file}`), res.stdout);
       });
     }
@@ -168,7 +216,10 @@ describe("CLI (black-box)", () => {
     it("reports nothing to do when no markdown file is found", () => {
       const res = runCli([], { cwd: tmpDir() });
       assert.strictEqual(res.status, 0);
-      assert(res.stdout.includes("No markdown table formatting has been applied."), res.stdout);
+      assert(
+        res.stdout.includes("No markdown table formatting has been applied."),
+        res.stdout,
+      );
     });
   });
 
@@ -187,7 +238,11 @@ describe("CLI (black-box)", () => {
     });
 
     it("fails on a non numeric column padding", () => {
-      const res = runCli(["--columnpadding", "abc", path.join(GOOD, "input.md")]);
+      const res = runCli([
+        "--columnpadding",
+        "abc",
+        path.join(GOOD, "input.md"),
+      ]);
       assert.notStrictEqual(res.status, 0);
     });
 
