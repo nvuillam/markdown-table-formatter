@@ -15,7 +15,7 @@
 
 Format markdown tables in files, with a fast formatting engine written in Rust and embedded as WebAssembly.
 
-No dependencies, the same npm package works on every platform (Windows, macOS, Linux, x64 and arm64) with Node.js 22+.
+No dependencies, the same npm package works on every platform (Windows, macOS, Linux, x64 and arm64) with Node.js 22.17+.
 
 The formatting rules come from [markdown-table-prettify](https://github.com/darkriszty/MarkdownTablePrettify-VSCodeExt) 4.x, plus some fixes: tables in code blocks are left untouched and column widths follow the Unicode display width (CJK, kana, hangul, emoji...).
 

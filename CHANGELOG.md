@@ -5,7 +5,7 @@
 - Core: New formatting engine written in Rust and compiled to WebAssembly, embedded in the npm package
   - Same package on every platform (Windows, macOS, Linux, x64 and arm64), no native binary nor install script
   - Faster: about 2x on startup and on large sets of files
-- Core: Now requires Node.js 22+ (file search uses the built-in `fs.globSync`)
+- Core: Now requires Node.js 22.17+ (file search uses the built-in `fs.globSync`, stable since this version)
 - Core: No more runtime dependencies (previously 6 dependencies, among which the VS Code extension markdown-table-prettify)
 - Breaking changes in formatting results:
   - Behavior of markdown-table-prettify 4.x: tables without border never pad their first column on the left, header-only tables (header + separator) are formatted, tables inside blockquotes (`> |`) and after list markers (`- |`) are formatted
