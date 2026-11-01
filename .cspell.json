@@ -65,6 +65,10 @@
     "cdylib",
     "rlib",
     "wasm",
-    "blockquotes"
+    "blockquotes",
+    "zizmor",
+    "artipacked",
+    "codegen",
+    "FEFF"
   ]
 }
