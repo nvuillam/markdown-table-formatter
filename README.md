@@ -32,6 +32,7 @@ The formatting rules come from [markdown-table-prettify](https://github.com/dark
 - [Continuous Integration](#continuous-integration)
 - [pre-commit hook](#pre-commit-hook)
 - [Ignoring Code Blocks](#ignoring-code-blocks)
+- [Performance](#performance)
 - [Debug](#debug)
 - [Contribute](#contribute)
 - [Release notes](#release-notes)
@@ -131,6 +132,17 @@ You may wish to ignore specific markdown content, especially when using with [Me
 To achieve this, place tags `<!-- markdown-table-prettify-ignore-start -->` and `<!-- markdown-table-prettify-ignore-end -->` around the content you want markdown-table-formatter to ignore.
 
 Tables inside fenced code blocks (` ``` ` or `~~~`) and indented code blocks are never formatted.
+
+## Performance
+
+Formatting the 630 markdown files (11 MB) of the [MegaLinter](https://github.com/oxsecurity/megalinter) repository, with the command of its [format-tables.sh](https://github.com/oxsecurity/megalinter/blob/main/.automation/format-tables.sh) script (`find . -name "*.md" -print0 | xargs -0 -n 200 markdown-table-formatter --verbose`), on Windows 11 with Node.js 24:
+
+| Version | Run 1  | Run 2  | Run 3  | Average   | Speed       |
+|---------|--------|--------|--------|-----------|-------------|
+| 1.7.0   | 6.38 s | 6.07 s | 5.87 s | **6.1 s** | 1x          |
+| 2.1.0   | 1.41 s | 1.44 s | 1.40 s | **1.4 s** | 4.3x faster |
+
+Tip: send all files in a single call when possible, as each call starts Node.js again.
 
 ## Debug
 
