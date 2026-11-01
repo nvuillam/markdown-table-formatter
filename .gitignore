@@ -9,3 +9,5 @@ report/
 megalinter-reports/
 
 .sf/
+
+lib/wasm/
