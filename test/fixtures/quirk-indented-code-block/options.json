@@ -1,0 +1,3 @@
+{
+  "quirk": "Tables inside indented code blocks are code and must not be formatted"
+}

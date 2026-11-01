@@ -1,0 +1,4 @@
+{
+  "columnpadding": 2,
+  "quirk": "Output differs from markdown-table-prettify 4.x, which fixed this case"
+}

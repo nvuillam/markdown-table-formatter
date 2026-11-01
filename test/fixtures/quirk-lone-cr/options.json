@@ -1,0 +1,3 @@
+{
+  "quirk": "A lone carriage return inside a line was dropped and text was duplicated (a\rb became abb)"
+}
