@@ -47,7 +47,7 @@ pub fn split_line(line: &str) -> Vec<&str> {
             b'`' => backticks += 1,
             b'|' => {
                 let escaped = i > 0 && bytes[i - 1] == b'\\';
-                if !escaped && backticks % 2 == 0 {
+                if !escaped && backticks.is_multiple_of(2) {
                     cells.push(&line[start..i]);
                     start = i + 1;
                 }
