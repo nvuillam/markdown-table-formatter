@@ -4,9 +4,19 @@ const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { globSync } = require("../lib/glob");
+const { findFiles } = require("../lib/cli");
 
-describe("File discovery (glob)", () => {
+const globSync = (pattern, cwd = process.cwd()) => {
+  const previous = process.cwd();
+  process.chdir(cwd);
+  try {
+    return findFiles(pattern);
+  } finally {
+    process.chdir(previous);
+  }
+};
+
+describe("File discovery (fs.globSync)", () => {
   let dir;
   const files = [
     "README.md",
@@ -42,12 +52,13 @@ describe("File discovery (glob)", () => {
     ["docs/{a,bad_1}.md", ["docs/a.md", "docs/bad_1.md"]],
     ["docs/**/*.{md,txt}", ["docs/a.md", "docs/bad_1.md", "docs/notes.txt", "docs/sub/d1.md", "docs/sub/d2.md"]],
     ["docs/?.md", ["docs/a.md"]],
-    ["node_modules/**/*.md", ["node_modules/pkg/n.md"]],
+    ["node_modules/**/*.md", []],
+    ["docs/su*", []],
     [".hidden/*.md", [".hidden/h.md"]],
     ["nothing/**/*.md", []],
   ];
   for (const [pattern, expected] of cases) {
-    it(`${pattern} (skips dot files, node_modules and .git unless named)`, () => {
+    it(`${pattern} (skips dot files, folders, node_modules and .git)`, () => {
       assert.deepStrictEqual(globSync(pattern, dir), native(expected).sort());
     });
   }
