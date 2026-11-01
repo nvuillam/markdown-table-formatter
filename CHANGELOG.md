@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+- Core: Faster on large sets of files (about 1.6x on 1000 files)
+  - Up to 32 files are read and written at the same time (results keep the order of the files)
+  - File search no longer runs a stat call on each found file
+  - Texts without `|` skip the formatting engine
+  - The CLI no longer keeps the contents of updated files in memory
+- API: `run(files, { keepContents: false })` returns `null` instead of the file contents in `before` / `after`
+
 ## [2.0.0] 2026-11-01
 
 - Core: New formatting engine written in Rust and compiled to WebAssembly, embedded in the npm package
