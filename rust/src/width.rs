@@ -44,6 +44,12 @@ mod tests {
         assert_eq!(display_width("a\u{200B}b"), 2);
         assert_eq!(display_width("so\u{00AD}ft"), 4);
         assert_eq!(display_width("😀"), 2);
+        // Issue #107: emoji in the Basic Multilingual Plane, and emoji + variation selector 16
+        assert_eq!(display_width("☕"), 2);
+        assert_eq!(display_width("✅"), 2);
+        assert_eq!(display_width("🏔\u{FE0F}"), 2);
+        assert_eq!(display_width("⚠\u{FE0F}"), 2);
+        assert_eq!(display_width("ℹ\u{FE0F}"), 2);
         assert_eq!(display_width("é"), 1);
     }
 }
